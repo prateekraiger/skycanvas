@@ -90,7 +90,8 @@ const APODPage = () => {
               max={maxDate}
               value={selectedDate.toISOString().split("T")[0]}
               onChange={handleDateChange}
-              className="bg-slate-700 text-white py-1 px-2 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+              className="bg-[#181929] text-white py-1 px-2 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 transition-colors duration-200 shadow-sm"
+              style={{ colorScheme: "dark", WebkitColorScheme: "dark" }}
             />
           </div>
 
@@ -217,10 +218,9 @@ const APODPage = () => {
 
         <div className="mt-8 text-center text-gray-400 text-sm">
           <p>
-            The Astronomy Picture of the Day is one of NASA's most popular
-            services. It provides a daily image or photograph of our fascinating
-            universe, along with a brief explanation written by a professional
-            astronomer.
+            The Astronomy Picture of the Day provides a daily image or
+            photograph of our fascinating universe, along with a brief
+            explanation written by a professional astronomer.
           </p>
           <p className="mt-2">
             The archive dates back to June 16, 1995, when APOD started.

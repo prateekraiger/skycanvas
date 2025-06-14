@@ -10,6 +10,7 @@ import MarsRoverPage from "./pages/MarsRoverPage";
 import EPICPage from "./pages/EPICPage";
 import MediaLibraryPage from "./pages/MediaLibraryPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Loader from "./components/Loader";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,19 +19,15 @@ function App() {
     // Simulate loading resources
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-900">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500 mx-auto"></div>
-          <h1 className="text-3xl font-bold mt-6 text-white">SkyCanvas</h1>
-          <p className="text-gray-300 mt-2">Loading the universe...</p>
-        </div>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#0a1a2f] via-[#181929] to-[#23244a]">
+        <Loader />
       </div>
     );
   }

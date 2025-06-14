@@ -54,9 +54,6 @@ const MediaLibraryPage = () => {
     <div className="min-h-screen ">
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <AnimatedTitle text1="NASA Media Library" />
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">NASA Media Library</h1>
-        </div>
         <form
           className="flex flex-col md:flex-row gap-4 mb-8 justify-center bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl p-6 border border-[#23244a] shadow-lg transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
           onSubmit={handleSearch}

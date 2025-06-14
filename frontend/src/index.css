@@ -5,6 +5,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .bg-royalblue {
+    background-color: royalblue;
+  }
+}
+
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
