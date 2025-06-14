@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ImageGallery from "../components/common/ImageGallery";
 import LoadingIndicator from "../components/common/LoadingIndicator";
+import apiService from "../services/ApiService";
 
 const NASA_API_KEY = import.meta.env.VITE_NASA_API_KEY;
 const NASA_API_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers";
@@ -48,28 +49,17 @@ const ROVER_INFO = {
   },
 };
 
-const CAMERA_TOOLTIPS = {
+const MAIN_CAMERAS = {
   FHAZ: "Front Hazard Avoidance Camera",
   RHAZ: "Rear Hazard Avoidance Camera",
   MAST: "Mast Camera",
+  NAVCAM: "Navigation Camera",
+  PANCAM: "Panoramic Camera",
   CHEMCAM: "Chemistry and Camera Complex",
   MAHLI: "Mars Hand Lens Imager",
   MARDI: "Mars Descent Imager",
-  NAVCAM: "Navigation Camera",
-  PANCAM: "Panoramic Camera",
-  MINITES: "Miniature Thermal Emission Spectrometer (Mini-TES)",
-  EDL_RUCAM: "Rover Up-Look Camera",
-  EDL_DDCAM: "Descent Stage Down-Look Camera",
-  EDL_PUCAM1: "Parachute Up-Look Camera A",
-  EDL_PUCAM2: "Parachute Up-Look Camera B",
-  NAVCAM_LEFT: "Navigation Camera - Left",
-  NAVCAM_RIGHT: "Navigation Camera - Right",
   MCZ_LEFT: "Mastcam-Z Left",
   MCZ_RIGHT: "Mastcam-Z Right",
-  FRONT_HAZCAM_LEFT_A: "Front Hazard Avoidance Camera - Left",
-  FRONT_HAZCAM_RIGHT_A: "Front Hazard Avoidance Camera - Right",
-  REAR_HAZCAM_LEFT: "Rear Hazard Avoidance Camera - Left",
-  REAR_HAZCAM_RIGHT: "Rear Hazard Avoidance Camera - Right",
 };
 
 const statusColors = {
@@ -105,19 +95,21 @@ const MarsRoverPage = () => {
     setIsLoading(true);
     setError(null);
     try {
-      let url = `${NASA_API_URL}/${rover}/photos?api_key=${NASA_API_KEY}&page=${pageToFetch}`;
-      if (sol) url += `&sol=${sol}`;
-      if (earthDate) url += `&earth_date=${earthDate}`;
-      if (camera) url += `&camera=${camera}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data && Array.isArray(data.photos)) {
+      const params = {
+        page: pageToFetch,
+      };
+      if (sol) params.sol = sol;
+      if (earthDate) params.earth_date = earthDate;
+      if (camera) params.camera = camera;
+      const response = await apiService.getMarsRoverPhotos(rover, params);
+      const data = response.photos || response.data?.photos || [];
+      if (Array.isArray(data)) {
         if (reset) {
-          setImages(data.photos);
+          setImages(data);
         } else {
-          setImages((prev) => [...prev, ...data.photos]);
+          setImages((prev) => [...prev, ...data]);
         }
-        setHasMore(data.photos.length === 25); // NASA API returns max 25 per page
+        setHasMore(data.length === 25); // Backend returns max 25 per page
       } else {
         setHasMore(false);
         if (reset) setImages([]);
@@ -148,19 +140,16 @@ const MarsRoverPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1a1a2e] via-[#232946] to-[#1a1a2e] relative overflow-x-hidden">
-      {/* Optional: Starfield or Mars surface background effect */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 60% 10%, #ffb86b22 0%, #232946 80%)",
-        }}
-      ></div>
+    <div className="min-h-screen  relative overflow-x-hidden">
       <header className="relative z-10 py-10 mb-10 text-center">
-        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 mb-2 drop-shadow-lg">
-          Mars Rover Gallery
-        </h1>
+        <div className="flex flex-col items-center justify-center mb-2">
+          <span className="text-5xl text-orange-400 mb-2">
+            <i className="fas fa-mars"></i>
+          </span>
+          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 drop-shadow-lg">
+            Mars Rover Gallery
+          </h1>
+        </div>
         <p className="text-lg text-gray-300 max-w-2xl mx-auto">
           Explore Mars through the eyes of NASA's rovers. Filter by rover, sol,
           earth date, or camera. Powered by NASA's public API.
@@ -169,11 +158,11 @@ const MarsRoverPage = () => {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         {/* Rover Info Card */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
-          <div className="backdrop-blur-md bg-[#232946cc] rounded-2xl shadow-2xl p-6 flex flex-col items-center w-full md:w-1/2 relative overflow-hidden border border-[#ffb86b33]">
+          <div className="backdrop-blur-md bg-slate-800/90 rounded-2xl shadow-2xl p-6 flex flex-col items-center w-full md:w-1/2 relative overflow-hidden border border-slate-700">
             <img
               src={roverInfo.image}
               alt={roverInfo.name}
-              className="w-full max-h-40 object-cover rounded-xl shadow mb-4 border-2 border-[#ffb86b33]"
+              className="w-full max-h-40 object-cover rounded-xl shadow mb-4 border-2 border-slate-700"
             />
             <h2 className="text-3xl font-bold text-orange-200 mb-2 drop-shadow">
               {roverInfo.name}
@@ -182,14 +171,14 @@ const MarsRoverPage = () => {
               {roverInfo.description}
             </p>
             <div className="flex flex-wrap gap-2 text-sm justify-center">
-              <span className="bg-[#393e46] px-3 py-1 rounded-full text-gray-300">
+              <span className="bg-slate-700 px-3 py-1 rounded-full text-gray-300">
                 Landing: {roverInfo.landing_date}
               </span>
-              <span className="bg-[#393e46] px-3 py-1 rounded-full text-gray-300">
+              <span className="bg-slate-700 px-3 py-1 rounded-full text-gray-300">
                 Launch: {roverInfo.launch_date}
               </span>
               <span
-                className={`${
+                className={`$${
                   statusColors[roverInfo.status]
                 } px-3 py-1 rounded-full`}
               >
@@ -199,7 +188,7 @@ const MarsRoverPage = () => {
           </div>
           {/* Filter Form */}
           <form
-            className="backdrop-blur-md bg-[#232946cc] rounded-2xl shadow-lg p-6 flex flex-col gap-4 w-full md:w-1/2 border border-[#ffb86b33]"
+            className="backdrop-blur-md bg-slate-800/90 rounded-2xl shadow-lg p-6 flex flex-col gap-4 w-full md:w-1/2 border border-slate-700"
             onSubmit={(e) => {
               e.preventDefault();
               setPage(1);
@@ -216,7 +205,7 @@ const MarsRoverPage = () => {
               <select
                 value={rover}
                 onChange={(e) => setRover(e.target.value)}
-                className="bg-[#393e46] text-white py-2 px-3 rounded border border-[#393e46] focus:outline-none focus:border-orange-400"
+                className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
               >
                 {Object.keys(ROVER_INFO).map((r) => (
                   <option key={r} value={r}>
@@ -238,7 +227,7 @@ const MarsRoverPage = () => {
                   setEarthDate("");
                 }}
                 placeholder="e.g. 1000"
-                className="bg-[#393e46] text-white py-2 px-3 rounded border border-[#393e46] focus:outline-none focus:border-orange-400"
+                className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -250,7 +239,7 @@ const MarsRoverPage = () => {
                   setEarthDate(e.target.value);
                   setSol("");
                 }}
-                className="bg-[#393e46] text-white py-2 px-3 rounded border border-[#393e46] focus:outline-none focus:border-orange-400"
+                className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -258,10 +247,10 @@ const MarsRoverPage = () => {
               <select
                 value={camera}
                 onChange={(e) => setCamera(e.target.value)}
-                className="bg-[#393e46] text-white py-2 px-3 rounded border border-[#393e46] focus:outline-none focus:border-orange-400"
+                className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
               >
                 <option value="">All</option>
-                {Object.entries(CAMERA_TOOLTIPS).map(([code, name]) => (
+                {Object.entries(MAIN_CAMERAS).map(([code, name]) => (
                   <option key={code} value={code} title={name}>
                     {name} ({code})
                   </option>
@@ -271,14 +260,14 @@ const MarsRoverPage = () => {
             <div className="flex flex-row gap-4 mt-2">
               <button
                 type="submit"
-                className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-medium py-2 px-6 rounded transition-colors flex-1 shadow-lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded transition-colors flex-1 shadow-lg"
               >
                 Search
               </button>
               <button
                 type="button"
                 onClick={handleRandomSol}
-                className="bg-gradient-to-r from-[#ff5e62] to-[#ff9966] hover:from-[#ff3c3c] hover:to-[#ffb86b] text-white font-medium py-2 px-6 rounded transition-colors flex-1 shadow-lg"
+                className="bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-6 rounded transition-colors flex-1 shadow-lg"
               >
                 Random Sol
               </button>
@@ -297,12 +286,12 @@ const MarsRoverPage = () => {
           </div>
         ) : (
           <>
-            <ImageGallery images={images} cameraTooltips={CAMERA_TOOLTIPS} />
+            <ImageGallery images={images} cameraTooltips={MAIN_CAMERAS} />
             {hasMore && !isLoading && (
               <div className="flex justify-center mt-8">
                 <button
                   onClick={handleLoadMore}
-                  className="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-8 rounded-full shadow-lg text-lg transition-colors"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg text-lg transition-colors"
                 >
                   Load More
                 </button>

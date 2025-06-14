@@ -7,10 +7,10 @@ const APODPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Calculate the maximum date (today)
   const maxDate = new Date().toISOString().split('T')[0];
-  
+
   // APOD started on June 16, 1995
   const minDate = '1995-06-16';
 
@@ -42,7 +42,7 @@ const APODPage = () => {
   const handlePreviousDay = () => {
     const prevDay = new Date(selectedDate);
     prevDay.setDate(prevDay.getDate() - 1);
-    
+
     // Prevent going before the first APOD
     const minDateTime = new Date(minDate).getTime();
     if (prevDay.getTime() >= minDateTime) {
@@ -53,7 +53,7 @@ const APODPage = () => {
   const handleNextDay = () => {
     const nextDay = new Date(selectedDate);
     nextDay.setDate(nextDay.getDate() + 1);
-    
+
     // Prevent going into the future
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -63,7 +63,7 @@ const APODPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+    <div className="min-h-screen ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold">Astronomy Picture of the Day</h1>
@@ -71,7 +71,7 @@ const APODPage = () => {
             Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured.
           </p>
         </div>
-        
+
         {/* Date selector */}
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
           <button
@@ -82,7 +82,7 @@ const APODPage = () => {
             <i className="fas fa-chevron-left mr-2"></i>
             Previous Day
           </button>
-          
+
           <div className="bg-slate-800 p-2 rounded-lg">
             <input
               type="date"
@@ -93,7 +93,7 @@ const APODPage = () => {
               className="bg-slate-700 text-white py-1 px-2 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
             />
           </div>
-          
+
           <button
             onClick={handleNextDay}
             className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors"
@@ -103,7 +103,7 @@ const APODPage = () => {
             <i className="fas fa-chevron-right ml-2"></i>
           </button>
         </div>
-        
+
         {/* APOD Content */}
         <div className="bg-slate-800 rounded-lg shadow-lg overflow-hidden">
           {isLoading ? (
@@ -144,15 +144,15 @@ const APODPage = () => {
                   </div>
                 )}
               </div>
-              
+
               <div className="w-full lg:w-2/5 p-6 flex flex-col">
                 <h2 className="text-2xl font-bold mb-2">{apodData.title}</h2>
                 <p className="text-gray-400 mb-4">{new Date(apodData.date).toLocaleDateString()}</p>
-                
+
                 <div className="bg-slate-700/50 rounded p-4 mb-4 flex-grow overflow-auto max-h-[50vh] lg:max-h-[60vh]">
                   <p className="text-gray-200 whitespace-pre-line">{apodData.explanation}</p>
                 </div>
-                
+
                 <div className="mt-auto">
                   <div className="flex flex-wrap gap-2 text-sm">
                     {apodData.copyright && (
@@ -174,7 +174,7 @@ const APODPage = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   {apodData.hdurl && (
                     <a
                       href={apodData.hdurl}
@@ -195,10 +195,10 @@ const APODPage = () => {
             </div>
           )}
         </div>
-        
+
         <div className="mt-8 text-center text-gray-400 text-sm">
           <p>
-            The Astronomy Picture of the Day is one of NASA's most popular services. It provides a daily image or 
+            The Astronomy Picture of the Day is one of NASA's most popular services. It provides a daily image or
             photograph of our fascinating universe, along with a brief explanation written by a professional astronomer.
           </p>
           <p className="mt-2">

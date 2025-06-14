@@ -2,6 +2,16 @@ import { useState, useEffect } from "react";
 import Router from "./components/Router";
 import "./index.css";
 import ErrorBoundary from "./components/common/ErrorBoundary";
+import SpaceBackground from "./components/SpaceBackground";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+import APODPage from "./pages/APODPage";
+import MarsRoverPage from "./pages/MarsRoverPage";
+import EPICPage from "./pages/EPICPage";
+import AsteroidsPage from "./pages/AsteroidsPage";
+import MediaLibraryPage from "./pages/MediaLibraryPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,9 +39,24 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-slate-900 text-white">
-        <Router />
-      </div>
+      <SpaceBackground>
+        <div className="min-h-screen text-white flex flex-col">
+          <BrowserRouter>
+            <Navbar />
+            <div className="flex-grow">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/apod" element={<APODPage />} />
+                <Route path="/mars-rover" element={<MarsRoverPage />} />
+                <Route path="/epic" element={<EPICPage />} />
+                <Route path="/asteroids" element={<AsteroidsPage />} />
+                <Route path="/media-library" element={<MediaLibraryPage />} />
+              </Routes>
+            </div>
+            <Footer />
+          </BrowserRouter>
+        </div>
+      </SpaceBackground>
     </ErrorBoundary>
   );
 }
