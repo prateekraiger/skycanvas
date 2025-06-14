@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import apiService from "../services/ApiService";
 import LoadingIndicator from "../components/common/LoadingIndicator";
+import Title from "../components/Title";
 
 const HomePage = () => {
   const [apodData, setApodData] = useState(null);
@@ -30,17 +31,9 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <div className="text-center mb-10 pt-10">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-6">
-            SkyCanvas
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Explore the wonders of space through NASA's rich data and imagery.
-            Discover the universe from Earth to the stars and beyond.
-          </p>
-        </div>
+        <Title text1="SkyCanvas" />
 
         {/* Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">

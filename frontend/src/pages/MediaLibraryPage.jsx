@@ -2,6 +2,7 @@ import { useState } from "react";
 import apiService from "../services/ApiService";
 import ImageGallery from "../components/common/ImageGallery";
 import LoadingIndicator from "../components/common/LoadingIndicator";
+import Title from "../components/Title";
 
 const MediaLibraryPage = () => {
   const [query, setQuery] = useState("");
@@ -51,13 +52,10 @@ const MediaLibraryPage = () => {
 
   return (
     <div className="min-h-screen ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="px-4 sm:px-6 lg:px-8 py-8">
+        <Title text1="NASA Media Library" />
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold">NASA Media Library</h1>
-          <p className="text-gray-300 mt-2">
-            Search NASA's vast collection of images and videos. Enter a keyword
-            to begin.
-          </p>
         </div>
         <form
           className="flex flex-col md:flex-row gap-4 mb-8 justify-center"

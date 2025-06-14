@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import apiService from "../services/ApiService";
 import ImageGallery from "../components/common/ImageGallery";
 import LoadingIndicator from "../components/common/LoadingIndicator";
+import Title from "../components/Title";
 
 const EPICPage = () => {
   const [type, setType] = useState("natural");
@@ -48,14 +49,8 @@ const EPICPage = () => {
 
   return (
     <div className="min-h-screen ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">Earth View (EPIC)</h1>
-          <p className="text-gray-300 mt-2">
-            View stunning images of Earth captured by NASA's EPIC camera. Select
-            image type and date to explore.
-          </p>
-        </div>
+      <div className="px-4 sm:px-6 lg:px-8 py-8">
+        <Title text1="Earth View (EPIC)" />
         <div className="bg-slate-800 rounded-lg p-6 mb-8 shadow-lg flex flex-col md:flex-row gap-4 items-end">
           <div>
             <label className="block text-gray-400 mb-1">Image Type</label>

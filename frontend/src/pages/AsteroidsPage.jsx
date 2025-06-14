@@ -2,6 +2,7 @@ import { useState } from "react";
 import apiService from "../services/ApiService";
 import DataChart from "../components/common/DataChart";
 import LoadingIndicator from "../components/common/LoadingIndicator";
+import Title from "../components/Title";
 
 const AsteroidsPage = () => {
   const [startDate, setStartDate] = useState("");
@@ -53,14 +54,8 @@ const AsteroidsPage = () => {
 
   return (
     <div className="min-h-screen ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">Asteroid Tracker</h1>
-          <p className="text-gray-300 mt-2">
-            Track near-Earth objects and visualize asteroid data from NASA's NEO
-            database. Select a date range (max 7 days).
-          </p>
-        </div>
+      <div className="px-4 sm:px-6 lg:px-8 py-8">
+        <Title text1="Asteroid Tracker" />
         <div className="bg-slate-800 rounded-lg p-6 mb-8 shadow-lg flex flex-col md:flex-row gap-4 items-end">
           <div>
             <label className="block text-gray-400 mb-1">Start Date</label>

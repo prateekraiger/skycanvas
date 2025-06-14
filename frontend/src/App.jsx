@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Router from "./components/Router";
 import "./index.css";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import SpaceBackground from "./components/SpaceBackground";

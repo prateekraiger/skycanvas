@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ImageGallery from "../components/common/ImageGallery";
 import LoadingIndicator from "../components/common/LoadingIndicator";
 import apiService from "../services/ApiService";
+import Title from "../components/Title";
 
 const NASA_API_KEY = import.meta.env.VITE_NASA_API_KEY;
 const NASA_API_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers";
@@ -142,20 +143,9 @@ const MarsRoverPage = () => {
   return (
     <div className="min-h-screen  relative overflow-x-hidden">
       <header className="relative z-10 py-10 mb-10 text-center">
-        <div className="flex flex-col items-center justify-center mb-2">
-          <span className="text-5xl text-orange-400 mb-2">
-            <i className="fas fa-mars"></i>
-          </span>
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 drop-shadow-lg">
-            Mars Rover Gallery
-          </h1>
-        </div>
-        <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-          Explore Mars through the eyes of NASA's rovers. Filter by rover, sol,
-          earth date, or camera. Powered by NASA's public API.
-        </p>
+        <Title text1="Mars Rover Gallery" />
       </header>
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 pb-8">
         {/* Rover Info Card */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
           <div className="backdrop-blur-md bg-slate-800/90 rounded-2xl shadow-2xl p-6 flex flex-col items-center w-full md:w-1/2 relative overflow-hidden border border-slate-700">
