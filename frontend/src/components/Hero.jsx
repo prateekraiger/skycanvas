@@ -3,9 +3,9 @@ import GlobeDemo from "./ui/globe-demo";
 
 function Hero() {
   return (
-    <section className="w-full flex flex-col md:flex-row items-center justify-between gap-8 pt-8 pb-8 transition-all duration-500 min-h-[60vh]">
-      <div className="flex-1 max-w-2xl flex flex-col items-start justify-center pb-12 -mt-48 animate-fade-in-up">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-4 drop-shadow-lg text-left">
+    <section className="w-full flex flex-col md:flex-row items-center justify-between gap-4 pt-2 pb-2 transition-all duration-500 min-h-[60vh]">
+      <div className="flex-1 max-w-2xl flex flex-col justify-center self-stretch animate-fade-in-up -mt-10">
+        <h1 className="text-5xl md:text-7xl -mt-36 font-extrabold text-white mb-4 drop-shadow-lg text-left">
           Welcome to{" "}
           <span className="text-cyan-400 text-7xl md:text-8xl block leading-tight">
             SkyCanvas
@@ -18,7 +18,7 @@ function Hero() {
         </p>
       </div>
       {/* Globe on the right */}
-      <div className="flex-1 flex flex-col items-center justify-center min-w-[320px] max-w-lg w-full">
+      <div className="flex-1 flex flex-col items-center justify-center self-stretch min-w-[320px] max-w-lg w-full mt-8 md:mt-12">
         <GlobeDemo />
       </div>
     </section>

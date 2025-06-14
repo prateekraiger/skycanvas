@@ -34,7 +34,7 @@ const AnimatedTitle = ({ text1, text2, desc, containerClass = "" }) => {
   return (
     <motion.div
       className={clsx(
-        "animated-title text-center mt-12 mb-12 md:mt-20 md:mb-20 relative",
+        "animated-title text-center mt-2 mb-2 md:mt-4 md:mb-4 relative",
         containerClass
       )}
       initial="hidden"
@@ -62,7 +62,7 @@ const AnimatedTitle = ({ text1, text2, desc, containerClass = "" }) => {
           text2.split(" ").map((word, idx) => (
             <motion.span
               key={"t2-" + idx}
-              className="animated-word text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none text-pink-400 drop-shadow"
+              className="animated-word text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none text-blue-400 drop-shadow"
               variants={wordVariants}
               style={{
                 fontFamily: "Orbitron, 'Anta', 'Merriweather', serif",
