@@ -21,3 +21,8 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Ignore lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
