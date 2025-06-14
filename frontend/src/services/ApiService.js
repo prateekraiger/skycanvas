@@ -91,18 +91,6 @@ class ApiService {
   }
 
   /**
-   * Get asteroid data (Near Earth Objects)
-   * @param {string} startDate - Start date in YYYY-MM-DD format
-   * @param {string} endDate - End date in YYYY-MM-DD format
-   */
-  async getAsteroids(startDate, endDate) {
-    // Backend: /neows/feed?start_date=...&end_date=...
-    return this.fetchAPI(
-      `/neows/feed?start_date=${startDate}&end_date=${endDate}`
-    );
-  }
-
-  /**
    * Search NASA Media Library
    * @param {string} query - Search query
    * @param {number} page - Page number

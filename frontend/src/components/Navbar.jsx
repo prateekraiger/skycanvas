@@ -9,7 +9,6 @@ const navItems = [
   { name: "APOD", path: "/apod" },
   { name: "Mars Rover", path: "/mars-rover" },
   { name: "Earth View", path: "/epic" },
-  { name: "Asteroid Tracker", path: "/asteroids" },
   { name: "Media Library", path: "/media-library" },
 ];
 

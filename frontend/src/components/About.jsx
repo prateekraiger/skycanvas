@@ -1,6 +1,7 @@
 import React from "react";
 import AnimatedTitle from "./AnimatedTitle";
 import { Link } from "react-router-dom";
+import CubeSpinner from "./CubeSpinner";
 
 const features = [
   {
@@ -22,16 +23,16 @@ const features = [
     to: "/epic",
   },
   {
-    icon: "☄️",
-    title: "Asteroid Tracking",
-    desc: "NEO database visualization and monitoring",
-    to: "/asteroids",
+    icon: "🖼️",
+    title: "Media Library",
+    desc: "Browse NASA's vast collection of images, videos, and audio.",
+    to: "/media-library",
   },
 ];
 
 const About = () => {
   return (
-    <section className="relative mt-0 mb-0 pt-0">
+    <section className="relative mt-0 lg:-mt-40 mb-0 pt-0">
       <div className="relative p-0 md:p-0 rounded-3xl shadow-none border-none overflow-visible bg-transparent">
         <div className="relative z-10 flex flex-col lg:flex-row gap-0 items-center">
           {/* Content section */}
@@ -49,9 +50,8 @@ const About = () => {
               </p>
               <p>
                 Dive into daily cosmic imagery, explore Mars through rover eyes,
-                track asteroids, and view our planet from space—all in one
-                seamless, beautiful experience designed for the modern space
-                explorer.
+                and view our planet from space—all in one seamless, beautiful
+                experience designed for the modern space explorer.
               </p>
             </div>
             {/* Feature cards grid */}
@@ -89,45 +89,17 @@ const About = () => {
               </div>
             </div>
           </div>
-          {/* Visual element - Enhanced */}
-          <div className="relative flex-shrink-0">
-            <div className="relative w-80 h-80 lg:w-96 lg:h-96">
-              {/* Central content */}
-              <div className="absolute inset-4 rounded-full bg-slate-900/80 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div
-                    className="text-6xl lg:text-7xl animate-bounce"
-                    style={{ animationDuration: "3s" }}
-                  >
-                    🚀
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-2xl font-bold text-cyan-300">
-                      Explore
-                    </div>
-                    <div className="text-2xl font-bold text-blue-400">
-                      Discover
-                    </div>
-                    <div className="text-2xl font-bold text-blue-300">
-                      Wonder
-                    </div>
-                  </div>
+          {/* Visual element - Compact Cube Spinner */}
+          <div className="relative flex-shrink-0 flex flex-col items-center justify-center w-full sm:w-80 md:w-72 lg:w-80">
+            <div className="flex flex-col items-center justify-center py-2">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 flex items-center justify-center">
+                <CubeSpinner />
+              </div>
+              <div className="mt-3 text-center">
+                <div className="text-base font-semibold text-cyan-200">
+                  Explore Universe
                 </div>
               </div>
-              {/* Floating elements around the circle */}
-              <div className="absolute -top-4 left-1/4 w-8 h-8 bg-cyan-400/30 rounded-full blur-sm animate-pulse"></div>
-              <div
-                className="absolute top-1/4 -right-4 w-6 h-6 bg-purple-400/30 rounded-full blur-sm animate-pulse"
-                style={{ animationDelay: "1s" }}
-              ></div>
-              <div
-                className="absolute -bottom-4 right-1/4 w-10 h-10 bg-pink-400/30 rounded-full blur-sm animate-pulse"
-                style={{ animationDelay: "2s" }}
-              ></div>
-              <div
-                className="absolute bottom-1/4 -left-4 w-4 h-4 bg-indigo-400/30 rounded-full blur-sm animate-pulse"
-                style={{ animationDelay: "1.5s" }}
-              ></div>
             </div>
           </div>
         </div>

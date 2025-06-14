@@ -82,8 +82,31 @@ export function Globe({ globeConfig, data }) {
 
   useEffect(() => {
     if (globeRef.current && globeData) {
+      // Filter out invalid polygons
+      const validFeatures = countries.features.filter((feature) => {
+        if (!feature.geometry || !feature.geometry.coordinates) {
+          console.warn("Invalid feature geometry:", feature);
+          return false;
+        }
+        // Flatten all coordinates (handles Polygon and MultiPolygon)
+        const coords =
+          feature.geometry.type === "Polygon"
+            ? feature.geometry.coordinates.flat(1)
+            : feature.geometry.type === "MultiPolygon"
+            ? feature.geometry.coordinates.flat(2)
+            : [];
+        const valid = coords.every(
+          (point) =>
+            Array.isArray(point) &&
+            point.length === 2 &&
+            point.every((v) => typeof v === "number" && isFinite(v))
+        );
+        if (!valid) console.warn("Invalid polygon coordinates:", feature);
+        return valid;
+      });
+
       globeRef.current
-        .hexPolygonsData(countries.features)
+        .hexPolygonsData(validFeatures)
         .hexPolygonResolution(3)
         .hexPolygonMargin(0.7)
         .showAtmosphere(defaultProps.showAtmosphere)
@@ -97,8 +120,28 @@ export function Globe({ globeConfig, data }) {
   const startAnimation = () => {
     if (!globeRef.current || !globeData) return;
 
+    // Filter out invalid arcs and points
+    const validArcs = data.filter((arc) => {
+      const valid = [
+        arc.startLat,
+        arc.startLng,
+        arc.endLat,
+        arc.endLng,
+        arc.arcAlt,
+      ].every((v) => typeof v === "number" && isFinite(v));
+      if (!valid) console.warn("Invalid arc:", arc);
+      return valid;
+    });
+    const validPoints = globeData.filter((pt) => {
+      const valid = [pt.lat, pt.lng].every(
+        (v) => typeof v === "number" && isFinite(v)
+      );
+      if (!valid) console.warn("Invalid point:", pt);
+      return valid;
+    });
+
     globeRef.current
-      .arcsData(data)
+      .arcsData(validArcs)
       .arcStartLat((d) => d.startLat)
       .arcStartLng((d) => d.startLng)
       .arcEndLat((d) => d.endLat)
@@ -112,7 +155,7 @@ export function Globe({ globeConfig, data }) {
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
     globeRef.current
-      .pointsData(data)
+      .pointsData(validArcs)
       .pointColor((e) => e.color)
       .pointsMerge(true)
       .pointAltitude(0.0)

@@ -28,7 +28,7 @@ const GlobeDemo = () => {
   };
 
   const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
-  const sampleArcs = [
+  const sampleArcsRaw = [
     {
       order: 1,
       startLat: -19.885592,
@@ -391,10 +391,10 @@ const GlobeDemo = () => {
     },
   ];
 
-  // Filter out invalid arcs
-  const validArcs = sampleArcs.filter((arc) =>
+  // Filter out any arcs with invalid (NaN or undefined) coordinates
+  const sampleArcs = sampleArcsRaw.filter((arc) =>
     [arc.startLat, arc.startLng, arc.endLat, arc.endLng, arc.arcAlt].every(
-      (v) => typeof v === "number" && !isNaN(v)
+      (v) => typeof v === "number" && isFinite(v)
     )
   );
 
@@ -403,7 +403,7 @@ const GlobeDemo = () => {
       {/* Globe on the left */}
       <div className="flex flex-col items-center justify-center basis-1/2 grow">
         <div className="relative aspect-square w-full max-w-[90vw] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[800px] min-w-[60vw] sm:min-w-[300px] md:min-w-[400px] lg:min-w-[600px]">
-          <World data={validArcs} globeConfig={globeConfig} />
+          <World data={sampleArcs} globeConfig={globeConfig} />
         </div>
       </div>
       {/* Hero text goes here (right side) */}

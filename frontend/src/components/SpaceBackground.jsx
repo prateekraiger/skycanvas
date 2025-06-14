@@ -194,7 +194,7 @@ const SpaceBackground = ({ children }) => {
       {/* Content container */}
       <div className="relative z-10">{children}</div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes twinkle {
           0% {
             opacity: 0.3;

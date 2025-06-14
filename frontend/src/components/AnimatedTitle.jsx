@@ -34,7 +34,7 @@ const AnimatedTitle = ({ text1, text2, desc, containerClass = "" }) => {
   return (
     <motion.div
       className={clsx(
-        "animated-title text-center mt-2 mb-2 md:mt-4 md:mb-4 relative",
+        "animated-title text-center mt-0 mb-2 md:mt-0 md:mb-4 relative",
         containerClass
       )}
       initial="hidden"

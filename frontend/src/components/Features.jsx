@@ -26,14 +26,6 @@ const features = [
     color: "#34d399",
     to: "/epic",
   },
-  {
-    title: "Asteroid Tracker",
-    description:
-      "Track near-Earth objects and visualize asteroid data from NASA's NEO database.",
-    icon: "fas fa-meteor",
-    color: "#facc15",
-    to: "/asteroids",
-  },
 ];
 
 const Card = ({ title, description, icon, color, to }) => (

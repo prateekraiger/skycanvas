@@ -2,7 +2,7 @@
 
 ![SkyCanvas Screenshot/Demo](link-to-your-screenshot-or-gif-here)
 
-SkyCanvas is a modern, interactive web application designed to bring the wonders of NASA's public data and imagery directly to your browser. It serves as a personal gateway to explore the cosmos, offering a rich collection of features from daily astronomical pictures to detailed Mars Rover missions and asteroid tracking.
+SkyCanvas is a modern, interactive web application designed to bring the wonders of NASA's public data and imagery directly to your browser. It serves as a personal gateway to explore the cosmos, offering a rich collection of features from daily astronomical pictures to detailed Mars Rover missions.
 
 ## ✨ Features
 
@@ -10,7 +10,6 @@ SkyCanvas is a modern, interactive web application designed to bring the wonders
 - **Mars Rover Gallery:** Dive into thousands of images captured by NASA's Curiosity, Opportunity, Spirit, and Perseverance rovers, with advanced filtering by rover, Martian day (sol), Earth date, and camera.
 - **Earth View (EPIC):** Explore stunning images of Earth from the DSCOVR satellite's Earth Polychromatic Imaging Camera (EPIC).
 - **NASA Media Library Search:** Search and browse NASA's extensive collection of images, videos, and audio.
-- **Asteroid Tracker (NeoWs):** Monitor near-Earth objects (NEOs) and visualize their data.
 - **Responsive & Intuitive UI:** Built with React and Tailwind CSS for a seamless experience across devices.
 - **Robust Backend API Gateway:** Features data fetching, caching, and rate limiting to optimize requests to NASA's APIs.
 
@@ -100,54 +99,5 @@ Environment variables are used to manage sensitive information and configuration
 ## 📂 Project Structure
 
 ```
-skycanvas/
-├── backend/          # Node.js/Express API gateway
-│   ├── src/
-│   │   ├── config/      # API configuration (e.g., NASA API key setup)
-│   │   ├── controllers/ # Logic for handling API requests
-│   │   ├── middlewares/ # Express middleware (e.g., rate limiting)
-│   │   ├── routes/      # API route definitions
-│   │   └── utils/       # Utility functions (e.g., response formatting, caching)
-│   ├── .env          # Backend environment variables
-│   ├── package.json
-│   └── server.js     # Main backend server entry point
-├── frontend/         # React web application
-│   ├── public/        # Static assets
-│   ├── src/
-│   │   ├── components/  # Reusable React components
-│   │   │   └── common/  # Generic, widely used components
-│   │   ├── pages/       # Page-specific components (e.g., MarsRoverPage)
-│   │   ├── services/    # API service for frontend-to-backend communication
-│   │   ├── App.jsx      # Main React application component
-│   │   ├── main.jsx     # React entry point
-│   │   └── index.css    # Global CSS styles
-│   ├── .env          # Frontend environment variables
-│   ├── package.json
-│   ├── tailwind.config.js
-│   └── vite.config.js
-├── .gitignore        # Specifies intentionally untracked files to ignore
-├── LICENSE           # Project license information
-└── README.md         # Project overview and documentation
+
 ```
-
-## ▶️ Available Scripts
-
-From the respective `backend/` or `frontend/` directories, you can run:
-
-- `npm install`: Installs project dependencies.
-- `npm run dev`: Starts the development server with hot-reloading.
-- `npm start`: (Backend only) Starts the application in production mode.
-- `npm test`: (If configured) Runs tests.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to open issues, submit pull requests, or suggest improvements. For major changes, please open an issue first to discuss what you would like to change.
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## 🙏 Credits
-
-- Developed by [Your Name/Team Name]
-- Powered by [NASA Open APIs](https://api.nasa.gov/)

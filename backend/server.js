@@ -38,7 +38,6 @@ app.get("/", (req, res) => {
       apod: "/api/nasa/apod",
       marsRover: "/api/nasa/mars-rover",
       epic: "/api/nasa/epic",
-      neows: "/api/nasa/neows",
       mediaLibrary: "/api/nasa/media",
     },
   });

@@ -7,7 +7,6 @@ const DEFAULT_TTL = {
   APOD: 86400, // 24 hours
   MARS_ROVER: 3600, // 1 hour
   EPIC: 3600, // 1 hour
-  NEOWS: 1800, // 30 minutes
   MEDIA: 3600, // 1 hour
 };
 
