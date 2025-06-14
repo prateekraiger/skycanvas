@@ -2,6 +2,7 @@ import { useState } from "react";
 import apiService from "../services/ApiService";
 import LoadingIndicator from "../components/common/LoadingIndicator";
 import AnimatedTitle from "../components/AnimatedTitle";
+import SearchBtn from "../components/SearchBtn";
 
 const today = new Date();
 const todayStr = today.toISOString().split("T")[0];
@@ -182,12 +183,7 @@ export default function AsteroidsPage() {
               style={{ colorScheme: "dark" }}
             />
           </div>
-          <button
-            type="submit"
-            className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-6 rounded shadow border border-cyan-400 transition-all duration-200 w-full md:w-auto"
-          >
-            Search
-          </button>
+          <SearchBtn onClick={fetchAsteroids} />
         </form>
         {error && (
           <div className="bg-red-900/30 border border-red-700 text-red-200 px-4 py-3 rounded mb-8">
