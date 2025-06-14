@@ -12,8 +12,22 @@ const RING_PROPAGATION_SPEED = 3;
 const aspect = 1.2;
 const cameraZ = 300;
 
+// Helper function to parse RGBA string to components
+function parseRgba(rgbaStr) {
+  const parts = rgbaStr.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+  if (parts && parts.length === 5) {
+    return {
+      r: parseInt(parts[1]),
+      g: parseInt(parts[2]),
+      b: parseInt(parts[3]),
+      a: parseFloat(parts[4]),
+    };
+  }
+  return null;
+}
+
 export function Globe({ globeConfig, data }) {
-  const [globeData, setGlobeData] = useState(null);
+  const [globeData, setGlobeData] = useState([]);
   const globeRef = useRef(null);
 
   const defaultProps = {
@@ -38,7 +52,7 @@ export function Globe({ globeConfig, data }) {
       _buildData();
       _buildMaterial();
     }
-  }, [globeRef.current]);
+  }, [globeRef.current, data]);
 
   const _buildMaterial = () => {
     if (!globeRef.current) return;
@@ -56,17 +70,30 @@ export function Globe({ globeConfig, data }) {
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
       const rgb = hexToRgb(arc.color);
+      if (!rgb) {
+        console.warn("Invalid color for arc, skipping:", arc);
+        continue;
+      }
+      if (
+        !isFinite(arc.startLat) ||
+        !isFinite(arc.startLng) ||
+        !isFinite(arc.endLat) ||
+        !isFinite(arc.endLng)
+      ) {
+        console.warn("Invalid arc coordinates, skipping:", arc);
+        continue;
+      }
       points.push({
         size: defaultProps.pointSize,
         order: arc.order,
-        color: (t) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
+        color: `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1)`,
         lat: arc.startLat,
         lng: arc.startLng,
       });
       points.push({
         size: defaultProps.pointSize,
         order: arc.order,
-        color: (t) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
+        color: `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1)`,
         lat: arc.endLat,
         lng: arc.endLng,
       });
@@ -113,9 +140,25 @@ export function Globe({ globeConfig, data }) {
         .atmosphereColor(defaultProps.atmosphereColor)
         .atmosphereAltitude(defaultProps.atmosphereAltitude)
         .hexPolygonColor(() => defaultProps.polygonColor);
+
+      // Configure ring properties here globally
+      globeRef.current
+        .ringColor((e) => {
+          const rgba = parseRgba(e.color);
+          if (rgba) {
+            return (t) => `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${1 - t})`;
+          }
+          return "rgba(255,255,255,1)"; // Default if parsing fails
+        })
+        .ringMaxRadius(defaultProps.maxRings)
+        .ringPropagationSpeed(RING_PROPAGATION_SPEED)
+        .ringRepeatPeriod(
+          (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
+        );
+
       startAnimation();
     }
-  }, [globeData]);
+  }, [globeData, defaultProps]);
 
   const startAnimation = () => {
     if (!globeRef.current || !globeData) return;
@@ -155,36 +198,40 @@ export function Globe({ globeConfig, data }) {
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
     globeRef.current
-      .pointsData(validArcs)
+      .pointsData([])
       .pointColor((e) => e.color)
       .pointsMerge(true)
       .pointAltitude(0.0)
       .pointRadius(2);
-
-    globeRef.current
-      .ringsData([])
-      .ringColor((e) => (t) => e.color(t))
-      .ringMaxRadius(defaultProps.maxRings)
-      .ringPropagationSpeed(RING_PROPAGATION_SPEED)
-      .ringRepeatPeriod(
-        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
-      );
   };
 
   useEffect(() => {
-    if (!globeRef.current || !globeData) return;
+    if (!globeRef.current || !globeData || globeData.length === 0) return;
 
     const interval = setInterval(() => {
-      if (!globeRef.current || !globeData) return;
+      if (!globeRef.current || !globeData || globeData.length === 0) {
+        clearInterval(interval);
+        return;
+      }
       const numbersOfRings = genRandomNumbers(
         0,
-        data.length,
-        Math.floor((data.length * 4) / 5)
+        globeData.length,
+        Math.floor((globeData.length * 4) / 5)
       );
 
-      globeRef.current.ringsData(
-        globeData.filter((d, i) => numbersOfRings.includes(i))
-      );
+      const ringsDataFiltered = globeData
+        .filter((d, i) => numbersOfRings.includes(i))
+        .filter(
+          (pt) =>
+            typeof pt.lat === "number" &&
+            isFinite(pt.lat) &&
+            typeof pt.lng === "number" &&
+            isFinite(pt.lng)
+        );
+
+      // console.log("Rings Data to be sent to globe:", ringsDataFiltered);
+
+      globeRef.current.ringsData(ringsDataFiltered);
     }, 2000);
 
     return () => {
@@ -265,7 +312,13 @@ export function hexToRgb(hex) {
 
 export function genRandomNumbers(min, max, count) {
   const arr = [];
+  if (max <= min || count <= 0) {
+    return [];
+  }
   while (arr.length < count) {
+    if (arr.length >= max - min) {
+      break;
+    }
     const r = Math.floor(Math.random() * (max - min)) + min;
     if (arr.indexOf(r) === -1) arr.push(r);
   }

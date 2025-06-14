@@ -150,10 +150,10 @@ export default function AsteroidsPage() {
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <AnimatedTitle text1="Asteroids (Near Earth Objects)" />
         <form
-          className="flex flex-col md:flex-row gap-4 mb-8 items-end bg-[#181929] rounded-2xl p-6 border border-[#23244a] shadow-lg"
+          className="flex flex-col md:flex-row gap-4 mb-8 items-start md:items-end bg-[#181929] rounded-2xl p-6 border border-[#23244a] shadow-lg"
           onSubmit={fetchAsteroids}
         >
-          <div>
+          <div className="w-full md:w-auto">
             <label className="block text-gray-300 mb-1 font-semibold">
               Start Date
             </label>
@@ -162,12 +162,12 @@ export default function AsteroidsPage() {
               value={startDate}
               max={todayStr}
               onChange={handleStartDateChange}
-              className="bg-[#23244a] text-cyan-200 py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 min-w-[140px]"
+              className="bg-[#23244a] text-cyan-200 py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 w-full"
               required
               style={{ colorScheme: "dark" }}
             />
           </div>
-          <div>
+          <div className="w-full md:w-auto">
             <label className="block text-gray-300 mb-1 font-semibold">
               End Date
             </label>
@@ -177,14 +177,14 @@ export default function AsteroidsPage() {
               min={startDate}
               max={maxEndDate}
               onChange={handleEndDateChange}
-              className="bg-[#23244a] text-cyan-200 py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 min-w-[140px]"
+              className="bg-[#23244a] text-cyan-200 py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 w-full"
               required
               style={{ colorScheme: "dark" }}
             />
           </div>
           <button
             type="submit"
-            className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-6 rounded shadow border border-cyan-400 transition-all duration-200"
+            className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-2 px-6 rounded shadow border border-cyan-400 transition-all duration-200 w-full md:w-auto"
           >
             Search
           </button>
@@ -206,28 +206,28 @@ export default function AsteroidsPage() {
               <table className="min-w-full text-sm">
                 <thead className="sticky top-0 z-10 bg-[#23244a]">
                   <tr>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
+                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
                       Name
                     </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
+                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
                       Close Approach Date
                     </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
+                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-right font-bold uppercase tracking-wider">
                       Abs. Magnitude
                     </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
+                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-right font-bold uppercase tracking-wider">
                       Diameter (m)
                     </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
+                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-right font-bold uppercase tracking-wider">
                       Miss Distance (km)
                     </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
+                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-right font-bold uppercase tracking-wider">
                       Rel. Velocity (km/s)
                     </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-center font-bold uppercase tracking-wider">
+                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-center font-bold uppercase tracking-wider">
                       Hazardous?
                     </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
+                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
                       Orbiting Body
                     </th>
                     <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
@@ -244,20 +244,20 @@ export default function AsteroidsPage() {
                         className={
                           "transition-all duration-200 " +
                           (i % 2 === 0
-                            ? "bg-black/60 hover:bg-cyan-900/20"
-                            : "bg-[#23244a]/60 hover:bg-cyan-900/30")
+                            ? "bg-black/60 hover:bg-white/10"
+                            : "bg-[#23244a]/60 hover:bg-white/10")
                         }
                       >
-                        <td className="px-4 py-3 border-b border-[#23244a] font-semibold text-cyan-100">
+                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] font-semibold text-cyan-100">
                           {a.name}
                         </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] text-gray-200">
+                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200">
                           {approach.close_approach_date || "-"}
                         </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] text-gray-200">
+                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200 text-right">
                           {a.absolute_magnitude_h}
                         </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] text-gray-200">
+                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200 text-right">
                           {a.estimated_diameter?.meters?.estimated_diameter_min?.toFixed(
                             1
                           )}{" "}
@@ -266,21 +266,21 @@ export default function AsteroidsPage() {
                             1
                           )}
                         </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] text-gray-200">
+                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200 text-right">
                           {approach.miss_distance?.kilometers
                             ? Number(
                                 approach.miss_distance.kilometers
                               ).toLocaleString()
                             : "-"}
                         </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] text-gray-200">
+                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200 text-right">
                           {approach.relative_velocity?.kilometers_per_second
                             ? Number(
                                 approach.relative_velocity.kilometers_per_second
                               ).toFixed(2)
                             : "-"}
                         </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] text-center">
+                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-center">
                           <span
                             className={
                               a.is_potentially_hazardous_asteroid
@@ -291,7 +291,7 @@ export default function AsteroidsPage() {
                             {a.is_potentially_hazardous_asteroid ? "Yes" : "No"}
                           </span>
                         </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] text-gray-200">
+                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200">
                           {approach.orbiting_body || "-"}
                         </td>
                         <td className="px-4 py-3 border-b border-[#23244a]">
