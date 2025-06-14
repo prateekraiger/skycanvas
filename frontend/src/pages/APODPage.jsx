@@ -83,7 +83,7 @@ const APODPage = () => {
             Previous Day
           </button>
 
-          <div className="bg-slate-800 p-2 rounded-lg">
+          <div className="bg-[#1A1C2C] p-2 rounded-lg border border-[#23244a]">
             <input
               type="date"
               min={minDate}
@@ -107,7 +107,7 @@ const APODPage = () => {
         </div>
 
         {/* APOD Content */}
-        <div className="bg-slate-800 rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl shadow-lg overflow-hidden border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]">
           {isLoading ? (
             <div className="flex justify-center py-12">
               <LoadingIndicator
@@ -123,7 +123,7 @@ const APODPage = () => {
             </div>
           ) : apodData ? (
             <div className="flex flex-col lg:flex-row">
-              <div className="w-full lg:w-3/5 bg-slate-900 flex items-center justify-center p-4">
+              <div className="w-full lg:w-3/5 bg-[#181929] flex items-center justify-center p-4">
                 {apodData.media_type === "image" ? (
                   <a
                     href={apodData.hdurl || apodData.url}
@@ -160,7 +160,7 @@ const APODPage = () => {
                   {new Date(apodData.date).toLocaleDateString()}
                 </p>
 
-                <div className="bg-slate-700/50 rounded p-4 mb-4 flex-grow overflow-auto max-h-[50vh] lg:max-h-[60vh]">
+                <div className="bg-[#23244a]/60 rounded p-4 mb-4 flex-grow overflow-auto max-h-[50vh] lg:max-h-[60vh]">
                   <p className="text-gray-200 whitespace-pre-line">
                     {apodData.explanation}
                   </p>
@@ -169,7 +169,7 @@ const APODPage = () => {
                 <div className="mt-auto">
                   <div className="flex flex-wrap gap-2 text-sm">
                     {apodData.copyright && (
-                      <div className="bg-slate-700 px-3 py-1 rounded-full">
+                      <div className="bg-[#23244a] px-3 py-1 rounded-full">
                         <span className="text-gray-400">© </span>
                         <span className="text-gray-200">
                           {apodData.copyright}
@@ -177,7 +177,7 @@ const APODPage = () => {
                       </div>
                     )}
                     {apodData.media_type && (
-                      <div className="bg-slate-700 px-3 py-1 rounded-full">
+                      <div className="bg-[#23244a] px-3 py-1 rounded-full">
                         <span className="text-gray-400">Type: </span>
                         <span className="text-gray-200">
                           {apodData.media_type}
@@ -185,7 +185,7 @@ const APODPage = () => {
                       </div>
                     )}
                     {apodData.service_version && (
-                      <div className="bg-slate-700 px-3 py-1 rounded-full">
+                      <div className="bg-[#23244a] px-3 py-1 rounded-full">
                         <span className="text-gray-400">Version: </span>
                         <span className="text-gray-200">
                           {apodData.service_version}
@@ -199,7 +199,7 @@ const APODPage = () => {
                       href={apodData.hdurl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors"
+                      className="mt-4 inline-block bg-[#181929] text-white py-2 px-4 rounded-full shadow-lg transition-all duration-300 hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_16px_#00d1ff99] hover:border-cyan-400 border border-[#23244a]"
                     >
                       <i className="fas fa-download mr-2"></i>
                       View High Resolution

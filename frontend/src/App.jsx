@@ -42,6 +42,7 @@ function App() {
         <div className="min-h-screen text-white flex flex-col">
           <BrowserRouter>
             <Navbar />
+            <div className="h-16 w-full" aria-hidden="true"></div>
             <div className="flex-grow">
               <Routes>
                 <Route path="/" element={<HomePage />} />

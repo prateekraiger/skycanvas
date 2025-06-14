@@ -39,7 +39,7 @@ const HomePage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           <Link
             to="/apod"
-            className="bg-slate-800 hover:bg-slate-700 rounded-lg shadow-lg overflow-hidden transition-colors"
+            className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl shadow-lg overflow-hidden border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
           >
             <div className="p-6">
               <div className="text-blue-400 text-3xl mb-4">
@@ -57,7 +57,7 @@ const HomePage = () => {
 
           <Link
             to="/mars-rover"
-            className="bg-slate-800 hover:bg-slate-700 rounded-lg shadow-lg overflow-hidden transition-colors"
+            className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl shadow-lg overflow-hidden border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
           >
             <div className="p-6">
               <div className="text-red-400 text-3xl mb-4">
@@ -73,7 +73,7 @@ const HomePage = () => {
 
           <Link
             to="/epic"
-            className="bg-slate-800 hover:bg-slate-700 rounded-lg shadow-lg overflow-hidden transition-colors"
+            className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl shadow-lg overflow-hidden border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
           >
             <div className="p-6">
               <div className="text-green-400 text-3xl mb-4">
@@ -88,7 +88,7 @@ const HomePage = () => {
 
           <Link
             to="/asteroids"
-            className="bg-slate-800 hover:bg-slate-700 rounded-lg shadow-lg overflow-hidden transition-colors"
+            className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl shadow-lg overflow-hidden border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
           >
             <div className="p-6">
               <div className="text-yellow-400 text-3xl mb-4">
@@ -119,7 +119,7 @@ const HomePage = () => {
               <p>{error}</p>
             </div>
           ) : apodData ? (
-            <div className="bg-slate-800 rounded-lg overflow-hidden shadow-lg">
+            <div className="bg-[#1A1C2C] rounded-lg overflow-hidden shadow-lg border border-[#23244a]">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="p-4">
                   {apodData.media_type === "image" ? (
@@ -156,7 +156,7 @@ const HomePage = () => {
                   </p>
                   <Link
                     to="/apod"
-                    className="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition-colors"
+                    className="mt-4 inline-block bg-[#181929] text-white font-medium py-2 px-6 rounded-full shadow-lg transition-all duration-300 group-hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_16px_#00d1ff99] hover:border-cyan-400 border border-[#23244a]"
                   >
                     Explore More APOD Images
                   </Link>
@@ -171,7 +171,7 @@ const HomePage = () => {
         </div>
 
         {/* About Section */}
-        <div className="bg-slate-800/50 rounded-lg p-6 shadow-lg">
+        <div className="bg-[#1A1C2C] bg-opacity-80 rounded-lg p-6 shadow-lg border border-[#23244a]">
           <h2 className="text-2xl font-bold mb-4">About SkyCanvas</h2>
           <p className="text-gray-300 mb-4">
             SkyCanvas is a web application that visualizes and explores various

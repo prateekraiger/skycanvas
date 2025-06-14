@@ -148,7 +148,7 @@ const MarsRoverPage = () => {
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 pb-8">
         {/* Rover Info Card */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
-          <div className="backdrop-blur-md bg-slate-800/90 rounded-2xl shadow-2xl p-6 flex flex-col items-center w-full md:w-1/2 relative overflow-hidden border border-slate-700">
+          <div className="backdrop-blur-md bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))]/90 rounded-2xl shadow-lg flex flex-col items-center w-full md:w-1/2 relative overflow-hidden border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]">
             <img
               src={roverInfo.image}
               alt={roverInfo.name}
@@ -161,10 +161,10 @@ const MarsRoverPage = () => {
               {roverInfo.description}
             </p>
             <div className="flex flex-wrap gap-2 text-sm justify-center">
-              <span className="bg-slate-700 px-3 py-1 rounded-full text-gray-300">
+              <span className="bg-[#23244a] px-3 py-1 rounded-full text-[#9CA3AF]">
                 Landing: {roverInfo.landing_date}
               </span>
-              <span className="bg-slate-700 px-3 py-1 rounded-full text-gray-300">
+              <span className="bg-[#23244a] px-3 py-1 rounded-full text-[#9CA3AF]">
                 Launch: {roverInfo.launch_date}
               </span>
               <span
@@ -178,7 +178,7 @@ const MarsRoverPage = () => {
           </div>
           {/* Filter Form */}
           <form
-            className="backdrop-blur-md bg-slate-800/90 rounded-2xl shadow-lg p-6 flex flex-col gap-4 w-full md:w-1/2 border border-slate-700"
+            className="backdrop-blur-md bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))]/90 rounded-2xl shadow-lg p-6 flex flex-col gap-4 w-full md:w-1/2 border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
             onSubmit={(e) => {
               e.preventDefault();
               setPage(1);
@@ -195,7 +195,7 @@ const MarsRoverPage = () => {
               <select
                 value={rover}
                 onChange={(e) => setRover(e.target.value)}
-                className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+                className="bg-[#23244a] text-[#F8F9FA] py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-[#00D1FF]"
               >
                 {Object.keys(ROVER_INFO).map((r) => (
                   <option key={r} value={r}>
@@ -217,7 +217,7 @@ const MarsRoverPage = () => {
                   setEarthDate("");
                 }}
                 placeholder="e.g. 1000"
-                className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+                className="bg-[#23244a] text-[#F8F9FA] py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-[#00D1FF]"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -229,7 +229,7 @@ const MarsRoverPage = () => {
                   setEarthDate(e.target.value);
                   setSol("");
                 }}
-                className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+                className="bg-[#23244a] text-[#F8F9FA] py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-[#00D1FF]"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -237,7 +237,7 @@ const MarsRoverPage = () => {
               <select
                 value={camera}
                 onChange={(e) => setCamera(e.target.value)}
-                className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+                className="bg-[#23244a] text-[#F8F9FA] py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-[#00D1FF]"
               >
                 <option value="">All</option>
                 {Object.entries(MAIN_CAMERAS).map(([code, name]) => (
@@ -250,14 +250,14 @@ const MarsRoverPage = () => {
             <div className="flex flex-row gap-4 mt-2">
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded transition-colors flex-1 shadow-lg"
+                className="bg-[#181929] text-white font-medium py-2 px-6 rounded-full shadow-lg transition-all duration-300 hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_16px_#00d1ff99] hover:border-cyan-400 border border-[#23244a] flex-1"
               >
                 Search
               </button>
               <button
                 type="button"
                 onClick={handleRandomSol}
-                className="bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-6 rounded transition-colors flex-1 shadow-lg"
+                className="bg-[#181929] text-white font-medium py-2 px-6 rounded-full shadow-lg transition-all duration-300 hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_16px_#00d1ff99] hover:border-cyan-400 border border-[#23244a] flex-1"
               >
                 Random Sol
               </button>
@@ -281,7 +281,7 @@ const MarsRoverPage = () => {
               <div className="flex justify-center mt-8">
                 <button
                   onClick={handleLoadMore}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg text-lg transition-colors"
+                  className="bg-[#181929] text-white font-bold py-3 px-8 rounded-full shadow-lg text-lg transition-all duration-300 hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_16px_#00d1ff99] hover:border-cyan-400 border border-[#23244a]"
                 >
                   Load More
                 </button>

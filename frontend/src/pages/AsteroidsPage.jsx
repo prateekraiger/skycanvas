@@ -56,14 +56,14 @@ const AsteroidsPage = () => {
     <div className="min-h-screen ">
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <Title text1="Asteroid Tracker" />
-        <div className="bg-slate-800 rounded-lg p-6 mb-8 shadow-lg flex flex-col md:flex-row gap-4 items-end">
+        <div className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl p-6 mb-8 shadow-lg flex flex-col md:flex-row gap-4 items-end border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]">
           <div>
             <label className="block text-gray-400 mb-1">Start Date</label>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+              className="bg-[#181929] text-[#F8F9FA] py-2 px-3 rounded-full border border-[#23244a] focus:outline-none focus:border-[#00D1FF]"
             />
           </div>
           <div>
@@ -72,13 +72,13 @@ const AsteroidsPage = () => {
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+              className="bg-[#181929] text-[#F8F9FA] py-2 px-3 rounded-full border border-[#23244a] focus:outline-none focus:border-[#00D1FF]"
             />
           </div>
           <div>
             <button
               onClick={fetchAsteroids}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded transition-colors mt-4 md:mt-0"
+              className="bg-[#181929] text-white font-medium py-2 px-6 rounded-full shadow-lg transition-all duration-300 hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_16px_#00d1ff99] hover:border-cyan-400 border border-[#23244a] mt-4 md:mt-0"
             >
               Search
             </button>
@@ -99,7 +99,7 @@ const AsteroidsPage = () => {
               <DataChart data={chartData} type="bar" height={300} />
             )}
             <div className="overflow-x-auto mt-8">
-              <table className="min-w-full bg-slate-800 rounded-lg overflow-hidden">
+              <table className="min-w-full bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl overflow-hidden border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]">
                 <thead>
                   <tr>
                     <th className="px-4 py-2 text-left text-gray-400">Name</th>

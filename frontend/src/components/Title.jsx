@@ -9,26 +9,23 @@ const Title = ({ text1, text2 }) => {
       {/* Main title */}
       <h1 className="relative text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-none mb-6">
         <span
-          className="block text-gray-100 font-mono tracking-wider transform hover:scale-105 transition-transform duration-300"
+          className="block text-gray-100 tracking-wider transform hover:scale-105 transition-transform duration-300"
           style={{
-            fontFamily: "'Orbitron', 'Space Mono', monospace",
             textShadow:
-              "0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.1)",
+              "0 0 20px rgba(255,255,255,0.3), 0 0 40px #00d1ff33, 0 0 80px #00d1ff22",
           }}
         >
           {text1}
         </span>
-        <span
-          className="block text-transparent bg-clip-text bg-gradient-to-r  from-cyan-400 via-purple-500 to-pink-500 font-black tracking-widest transform hover:scale-110 transition-all duration-500 mt-2"
-          style={{
-            fontFamily: "'Exo 2', 'Rajdhani', sans-serif",
-            textShadow: "0 0 30px rgba(59, 130, 246, 0.5)",
-            filter: "drop-shadow(0 0 20px rgba(139, 92, 246, 0.3))",
-          }}
+      </h1>
+      {text2 && (
+        <div
+          className="relative text-xl md:text-2xl text-cyan-300 font-semibold mb-2"
+          style={{ textShadow: "0 0 8px #00d1ff33" }}
         >
           {text2}
-        </span>
-      </h1>
+        </div>
+      )}
 
       {/* Animated decorative elements */}
       <div className="flex justify-center items-center space-x-4 mt-8">
@@ -50,11 +47,6 @@ const Title = ({ text1, text2 }) => {
         <div className="w-20 h-px bg-gradient-to-r from-blue-500 to-purple-500 self-center opacity-60"></div>
         <div className="w-1 h-1 bg-pink-500 rounded-full animate-bounce"></div>
       </div>
-
-      {/* Google Fonts preload */}
-      <style jsx>{`
-        @import url("https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap");
-      `}</style>
     </div>
   );
 };

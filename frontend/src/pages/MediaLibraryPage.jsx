@@ -58,7 +58,7 @@ const MediaLibraryPage = () => {
           <h1 className="text-3xl font-bold">NASA Media Library</h1>
         </div>
         <form
-          className="flex flex-col md:flex-row gap-4 mb-8 justify-center"
+          className="flex flex-col md:flex-row gap-4 mb-8 justify-center bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl p-6 border border-[#23244a] shadow-lg transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
           onSubmit={handleSearch}
         >
           <input
@@ -66,11 +66,11 @@ const MediaLibraryPage = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for images, videos, or keywords..."
-            className="bg-slate-700 text-white py-2 px-4 rounded border border-slate-600 focus:outline-none focus:border-blue-500 w-full md:w-96"
+            className="bg-[#23244a] text-[#F8F9FA] py-2 px-4 rounded border border-[#23244a] focus:outline-none focus:border-[#00D1FF] w-full md:w-96"
           />
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded transition-colors"
+            className="bg-[#181929] text-white font-medium py-2 px-6 rounded-full shadow-lg transition-all duration-300 hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_16px_#00d1ff99] hover:border-cyan-400 border border-[#23244a]"
           >
             Search
           </button>
@@ -92,7 +92,7 @@ const MediaLibraryPage = () => {
                 <button
                   onClick={() => handlePageChange(page - 1)}
                   disabled={page === 1}
-                  className="bg-slate-700 text-white px-4 py-2 rounded disabled:opacity-50"
+                  className="bg-[#181929] text-[#F8F9FA] px-4 py-2 rounded-full disabled:opacity-50 border border-[#23244a] transition-all duration-300 hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_8px_#00d1ff99] hover:border-cyan-400"
                 >
                   Previous
                 </button>
@@ -102,7 +102,7 @@ const MediaLibraryPage = () => {
                 <button
                   onClick={() => handlePageChange(page + 1)}
                   disabled={page === totalPages}
-                  className="bg-slate-700 text-white px-4 py-2 rounded disabled:opacity-50"
+                  className="bg-[#181929] text-[#F8F9FA] px-4 py-2 rounded-full disabled:opacity-50 border border-[#23244a] transition-all duration-300 hover:bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] hover:scale-105 hover:shadow-[0_0_8px_#00d1ff99] hover:border-cyan-400"
                 >
                   Next
                 </button>

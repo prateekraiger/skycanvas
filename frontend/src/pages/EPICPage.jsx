@@ -51,7 +51,7 @@ const EPICPage = () => {
     <div className="min-h-screen ">
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <Title text1="Earth View (EPIC)" />
-        <div className="bg-slate-800 rounded-lg p-6 mb-8 shadow-lg flex flex-col md:flex-row gap-4 items-end">
+        <div className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl p-6 mb-8 shadow-lg flex flex-col md:flex-row gap-4 items-end border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]">
           <div>
             <label className="block text-gray-400 mb-1">Image Type</label>
             <select
@@ -60,7 +60,7 @@ const EPICPage = () => {
                 setType(e.target.value);
                 setDate("");
               }}
-              className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+              className="bg-[#181929] text-[#F8F9FA] py-2 px-3 rounded-full border border-[#23244a] focus:outline-none focus:border-[#00D1FF]"
             >
               <option value="natural">Natural</option>
               <option value="enhanced">Enhanced</option>
@@ -71,7 +71,7 @@ const EPICPage = () => {
             <select
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="bg-slate-700 text-white py-2 px-3 rounded border border-slate-600 focus:outline-none focus:border-blue-500"
+              className="bg-[#181929] text-[#F8F9FA] py-2 px-3 rounded-full border border-[#23244a] focus:outline-none focus:border-[#00D1FF]"
             >
               <option value="">Select a date</option>
               {availableDates.map((d) => (
