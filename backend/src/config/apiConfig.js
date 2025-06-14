@@ -4,17 +4,19 @@
  * Centralizes all API related configuration
  */
 
-// NASA API Key (Fallback to DEMO_KEY if not provided)
-const NASA_API_KEY = "DEMO_KEY"; // Hardcoded
+require("dotenv").config();
 
-// NASA API Base URL
-const NASA_API_BASE_URL = "https://api.nasa.gov"; // Hardcoded
+const NASA_API_KEY = process.env.NASA_API_KEY;
 
-// URL for NASA's Image and Video Library (no API key required)
+const NASA_API_BASE_URL = "https://api.nasa.gov";
+
 const NASA_IMAGE_API_URL = "https://images-api.nasa.gov";
+
+const NEO_WS_BASE_URL = "https://api.nasa.gov/neo/rest/v1";
 
 module.exports = {
   NASA_API_KEY,
   NASA_API_BASE_URL,
   NASA_IMAGE_API_URL,
+  NEO_WS_BASE_URL,
 };

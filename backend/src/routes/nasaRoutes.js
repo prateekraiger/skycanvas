@@ -5,8 +5,8 @@ const router = express.Router();
 // Import controllers
 const apodController = require("../controllers/apodController");
 const marsRoverController = require("../controllers/marsRoverController");
-const epicController = require("../controllers/epicController");
 const mediaLibraryController = require("../controllers/mediaLibraryController");
+const asteroidsController = require("../controllers/asteroidsController");
 
 // Import rate limiters
 const { endpointLimiter } = require("../middlewares/rateLimiter");
@@ -35,25 +35,6 @@ router.get(
   marsRoverController.getRoverManifest
 );
 
-// EPIC (Earth Polychromatic Imaging Camera) routes
-router.get("/epic/natural", endpointLimiter, epicController.getNaturalImages);
-router.get("/epic/enhanced", endpointLimiter, epicController.getEnhancedImages);
-router.get(
-  "/epic/natural/date/:date",
-  endpointLimiter,
-  epicController.getNaturalImagesByDate
-);
-router.get(
-  "/epic/enhanced/date/:date",
-  endpointLimiter,
-  epicController.getEnhancedImagesByDate
-);
-router.get(
-  "/epic/available-dates",
-  endpointLimiter,
-  epicController.getAvailableDates
-);
-
 // NASA Image and Video Library routes
 router.get(
   "/media/search",
@@ -74,6 +55,13 @@ router.get(
   "/media/collections",
   endpointLimiter,
   mediaLibraryController.getCollections
+);
+
+// Asteroids (NeoWs) routes
+router.get(
+  "/asteroids/feed",
+  endpointLimiter,
+  asteroidsController.getAsteroidsFeed
 );
 
 module.exports = router;

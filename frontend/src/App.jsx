@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import APODPage from "./pages/APODPage";
 import MarsRoverPage from "./pages/MarsRoverPage";
-import EPICPage from "./pages/EPICPage";
+import AsteroidsPage from "./pages/AsteroidsPage";
 import MediaLibraryPage from "./pages/MediaLibraryPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loader";
@@ -44,7 +44,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/apod" element={<APODPage />} />
                 <Route path="/mars-rover" element={<MarsRoverPage />} />
-                <Route path="/epic" element={<EPICPage />} />
+                <Route path="/asteroids" element={<AsteroidsPage />} />
                 <Route path="/media-library" element={<MediaLibraryPage />} />
               </Routes>
             </div>

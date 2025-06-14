@@ -19,12 +19,11 @@ const features = [
     to: "/mars-rover",
   },
   {
-    title: "Earth View",
-    description:
-      "View stunning images of Earth captured by NASA's EPIC camera.",
-    icon: "fas fa-globe",
-    color: "#34d399",
-    to: "/epic",
+    title: "Asteroids (NEO)",
+    description: "Browse near-Earth asteroids and their close approaches.",
+    icon: "fas fa-meteor",
+    color: "#fbbf24",
+    to: "/asteroids",
   },
 ];
 

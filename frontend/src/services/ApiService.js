@@ -68,29 +68,6 @@ class ApiService {
   }
 
   /**
-   * Get EPIC (Earth Polychromatic Imaging Camera) images
-   * @param {string} date - Date in YYYY-MM-DD format (optional)
-   * @param {string} type - Image type ('natural', 'enhanced')
-   */
-  async getEPICImages(date = null, type = "natural") {
-    // Backend: /epic/natural or /epic/natural/date/:date
-    let endpoint = `/epic/${type}`;
-    if (date) {
-      endpoint = `/epic/${type}/date/${date}`;
-    }
-    return this.fetchAPI(endpoint);
-  }
-
-  /**
-   * Get available EPIC dates (backend: /epic/available-dates)
-   * @param {string} type - Image type ('natural', 'enhanced')
-   */
-  async getAvailableEPICDates(type = "natural") {
-    // Backend only provides /epic/available-dates (not by type)
-    return this.fetchAPI(`/epic/available-dates`);
-  }
-
-  /**
    * Search NASA Media Library
    * @param {string} query - Search query
    * @param {number} page - Page number
@@ -99,6 +76,18 @@ class ApiService {
     return this.fetchAPI(
       `/media/search?q=${encodeURIComponent(query)}&page=${page}`
     );
+  }
+
+  /**
+   * Get Asteroids (NeoWs feed)
+   * @param {string} startDate - Start date in YYYY-MM-DD format
+   * @param {string} endDate - End date in YYYY-MM-DD format
+   */
+  async getAsteroidsFeed(startDate, endDate) {
+    let endpoint = `/asteroids/feed?start_date=${encodeURIComponent(
+      startDate
+    )}&end_date=${encodeURIComponent(endDate)}`;
+    return this.fetchAPI(endpoint);
   }
 }
 

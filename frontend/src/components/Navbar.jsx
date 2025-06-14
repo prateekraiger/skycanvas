@@ -8,7 +8,7 @@ const navItems = [
   { name: "Home", path: "/" },
   { name: "APOD", path: "/apod" },
   { name: "Mars Rover", path: "/mars-rover" },
-  { name: "Earth View", path: "/epic" },
+  { name: "Asteroids", path: "/asteroids" },
   { name: "Media Library", path: "/media-library" },
 ];
 

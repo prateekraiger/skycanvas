@@ -17,10 +17,10 @@ const features = [
     to: "/mars-rover",
   },
   {
-    icon: "🌍",
-    title: "Earth from Space",
-    desc: "Live imagery from NASA's EPIC camera",
-    to: "/epic",
+    icon: "☄️",
+    title: "Asteroids (NEO)",
+    desc: "Browse near-Earth asteroids and their close approaches.",
+    to: "/asteroids",
   },
   {
     icon: "🖼️",
