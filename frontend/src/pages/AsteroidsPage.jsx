@@ -147,15 +147,15 @@ export default function AsteroidsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white">
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <AnimatedTitle text1="Asteroids (Near Earth Objects)" />
         <form
-          className="flex flex-col md:flex-row gap-4 mb-8 items-start md:items-end bg-[#181929] rounded-2xl p-6 border border-[#23244a] shadow-lg"
+          className="flex flex-col md:flex-row gap-4 mb-8 items-end justify-center bg-[#181929] rounded-2xl p-6 border border-[#23244a] shadow-lg"
           onSubmit={fetchAsteroids}
         >
           <div className="w-full md:w-auto">
-            <label className="block text-gray-300 mb-1 font-semibold">
+            <label className="block text-gray-300 mb-1 font-semibold text-center">
               Start Date
             </label>
             <input
@@ -163,13 +163,17 @@ export default function AsteroidsPage() {
               value={startDate}
               max={todayStr}
               onChange={handleStartDateChange}
-              className="bg-[#23244a] text-cyan-200 py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 w-full"
+              className="bg-[#23244a] text-cyan-200 py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 w-full text-center"
               required
               style={{ colorScheme: "dark" }}
             />
           </div>
+          {/* Arrow visual */}
+          <div className="flex items-center justify-center h-full text-cyan-400 text-3xl mb-1 sm:mb-0 md:mb-0">
+            <span className="select-none">&rarr;</span>
+          </div>
           <div className="w-full md:w-auto">
-            <label className="block text-gray-300 mb-1 font-semibold">
+            <label className="block text-gray-300 mb-1 font-semibold text-center">
               End Date
             </label>
             <input
@@ -178,12 +182,14 @@ export default function AsteroidsPage() {
               min={startDate}
               max={maxEndDate}
               onChange={handleEndDateChange}
-              className="bg-[#23244a] text-cyan-200 py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 w-full"
+              className="bg-[#23244a] text-cyan-200 py-2 px-3 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 w-full text-center"
               required
               style={{ colorScheme: "dark" }}
             />
           </div>
-          <SearchBtn onClick={fetchAsteroids} />
+          <div className="w-full md:w-auto flex items-end">
+            <SearchBtn onClick={fetchAsteroids} />
+          </div>
         </form>
         {error && (
           <div className="bg-red-900/30 border border-red-700 text-red-200 px-4 py-3 rounded mb-8">

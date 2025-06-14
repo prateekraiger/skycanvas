@@ -108,7 +108,7 @@ const APODPage = () => {
         </div>
 
         {/* APOD Content */}
-        <div className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl shadow-lg overflow-hidden border border-[#23244a] transition-all duration-300 group hover:scale-105 hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]">
+        <div className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl shadow-lg overflow-hidden border border-[#23244a] transition-all duration-300 group hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]">
           {isLoading ? (
             <div className="flex justify-center py-12">
               <LoadingIndicator

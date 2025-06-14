@@ -56,7 +56,7 @@ const MediaLibraryPage = () => {
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <AnimatedTitle text1="NASA Media Library" />
         <form
-          className="flex flex-col md:flex-row gap-4 mb-8 justify-center bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl p-6 border border-[#23244a] shadow-lg transition-all duration-300 group hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
+          className="flex flex-col md:flex-row gap-4 mb-8 justify-center bg-[#181929]/70 rounded-2xl p-6 border border-[#23244a] shadow-lg transition-all duration-300 group hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
           onSubmit={handleSearch}
         >
           <input
@@ -79,7 +79,7 @@ const MediaLibraryPage = () => {
                   setQuery(prompt);
                   handleSearch({ preventDefault: () => {} });
                 }}
-                className="bg-[#23244a] text-gray-300 px-4 py-2 rounded-full text-sm hover:bg-cyan-700 hover:text-white transition-colors duration-200 border border-[#23244a]"
+                className="bg-white/5 text-gray-300 px-4 py-2 rounded-full text-sm hover:bg-cyan-700 hover:text-white transition-colors duration-200 border border-[#23244a]"
               >
                 {prompt}
               </button>

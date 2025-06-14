@@ -29,7 +29,7 @@ const ImageGallery = ({ images, onImageClick, cameraTooltips = {} }) => {
         {images.map((image, index) => (
           <div
             key={image.id || index}
-            className="mb-3 break-inside-avoid bg-black/60 backdrop-blur-md rounded-xl overflow-hidden shadow-lg border border-[#23244a] hover:border-cyan-400 hover:shadow-[0_0_24px_#00d1ff55] transition-all duration-300 cursor-pointer group relative transform hover:scale-105"
+            className="mb-3 break-inside-avoid bg-white/5 backdrop-blur-md rounded-xl overflow-hidden shadow-lg border border-[#23244a] hover:border-cyan-400 hover:shadow-[0_0_24px_#00d1ff55] transition-all duration-300 cursor-pointer group relative transform"
             onClick={() => handleImageClick(image)}
           >
             <img

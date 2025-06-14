@@ -34,7 +34,7 @@ const About = () => {
   return (
     <section className="relative mt-0 lg:-mt-40 mb-0 pt-0">
       <div className="relative p-0 md:p-0 rounded-3xl shadow-none border-none overflow-visible bg-transparent">
-        <div className="relative z-10 flex flex-col lg:flex-row gap-0 items-center">
+        <div className="relative z-10 flex flex-col lg:flex-row-reverse gap-0 items-center">
           {/* Content section */}
           <div className="flex-1 space-y-8">
             {/* AnimatedTitle heading */}
@@ -60,9 +60,9 @@ const About = () => {
                 <Link
                   key={index}
                   to={feature.to}
-                  className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-cyan-400/30 hover:shadow-lg hover:shadow-cyan-400/20 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  className="group relative bg-gray-900/70 backdrop-blur-sm rounded-xl px-6 py-3 hover:bg-cyan-900/50 transition-all duration-300 border border-gray-700 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-400/30 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 >
-                  <div className="text-3xl mb-3 transition-transform duration-300 group-hover:animate-bounce group-active:scale-90 group-hover:scale-110">
+                  <div className="text-3xl mb-3 transition-transform duration-300">
                     {feature.icon}
                   </div>
                   <h3 className="font-bold text-white mb-2 text-lg">
@@ -90,7 +90,7 @@ const About = () => {
             </div>
           </div>
           {/* Visual element - Compact Cube Spinner */}
-          <div className="relative flex-shrink-0 flex flex-col items-center justify-center w-full sm:w-80 md:w-72 lg:w-80">
+          <div className="relative flex-shrink-0 flex flex-col items-center justify-center w-full sm:w-80 md:w-72 lg:w-80 lg:mr-auto">
             <div className="flex flex-col items-center justify-center py-2">
               <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 flex items-center justify-center">
                 <CubeSpinner />
