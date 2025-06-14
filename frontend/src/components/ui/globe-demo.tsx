@@ -391,13 +391,24 @@ const GlobeDemo = () => {
     },
   ];
 
+  // Filter out invalid arcs
+  const validArcs = sampleArcs.filter((arc) =>
+    [arc.startLat, arc.startLng, arc.endLat, arc.endLng, arc.arcAlt].every(
+      (v) => typeof v === "number" && !isNaN(v)
+    )
+  );
+
   return (
-    <div className="flex items-center justify-center absolute -left-5 top-36 md:top-40 w-full h-full">
-      <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-96 px-4">
-        <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40" />
-        <div className="absolute w-full h-72 md:h-full z-10">
-          <World data={sampleArcs} globeConfig={globeConfig} />
+    <div className="flex flex-col md:flex-row items-start justify-center w-full min-h-screen px-0 md:px-16 pt-0 pb-4 md:pb-8 gap-y-8 gap-x-8">
+      {/* Globe on the left */}
+      <div className="flex flex-col items-center justify-center basis-1/2 grow">
+        <div className="relative aspect-square w-full max-w-[90vw] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[800px] min-w-[60vw] sm:min-w-[300px] md:min-w-[400px] lg:min-w-[600px]">
+          <World data={validArcs} globeConfig={globeConfig} />
         </div>
+      </div>
+      {/* Hero text goes here (right side) */}
+      <div className="flex flex-col items-start self-start basis-1/2 grow px-4 md:px-8 min-h-[200px]">
+        {/* Place your hero text here, e.g. Welcome to Skycanvas... */}
       </div>
     </div>
   );
