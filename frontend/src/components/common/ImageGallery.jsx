@@ -25,11 +25,11 @@ const ImageGallery = ({ images, onImageClick, cameraTooltips = {} }) => {
   return (
     <div className="w-full">
       {/* Masonry layout using CSS columns */}
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
         {images.map((image, index) => (
           <div
             key={image.id || index}
-            className="mb-4 break-inside-avoid bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer group relative"
+            className="mb-3 break-inside-avoid bg-black/60 backdrop-blur-md rounded-xl overflow-hidden shadow-lg border border-[#23244a] hover:border-cyan-400 hover:shadow-[0_0_24px_#00d1ff55] transition-all duration-300 cursor-pointer group relative transform hover:scale-105"
             onClick={() => handleImageClick(image)}
           >
             <img
@@ -39,13 +39,13 @@ const ImageGallery = ({ images, onImageClick, cameraTooltips = {} }) => {
                 image.camera?.name ||
                 `Mars Rover Image ${index}`
               }
-              className="w-full object-cover max-h-80 min-h-[180px] group-hover:brightness-90 transition-all duration-200"
+              className="w-full object-cover max-h-72 min-h-[140px] group-hover:brightness-90 group-hover:scale-105 transition-all duration-300 rounded-xl"
               loading="lazy"
             />
             {/* Overlay on hover */}
-            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all p-4">
+            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all p-3 rounded-xl">
               <div className="text-white">
-                <div className="font-bold text-lg mb-1">
+                <div className="font-bold text-base mb-1">
                   {image.camera?.full_name ||
                     image.camera?.name ||
                     "Unknown Camera"}
@@ -67,21 +67,21 @@ const ImageGallery = ({ images, onImageClick, cameraTooltips = {} }) => {
       {/* Modal for fullsize image */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-2 md:p-6"
           onClick={closeModal}
         >
           <div
-            className="max-w-4xl w-full max-h-full relative bg-slate-900 rounded-lg shadow-2xl overflow-auto"
+            className="max-w-3xl w-full max-h-full relative bg-black/80 backdrop-blur-lg rounded-2xl shadow-2xl overflow-auto border border-cyan-700"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={closeModal}
-              className="absolute top-2 right-2 bg-black bg-opacity-60 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-opacity-80 transition-colors z-10"
+              className="absolute top-2 right-2 bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-cyan-700/80 transition-colors z-10 border border-cyan-700"
             >
               <i className="fas fa-times"></i>
             </button>
             <div className="flex flex-col md:flex-row">
-              <div className="flex-1 flex items-center justify-center p-4 bg-black bg-opacity-40">
+              <div className="flex-1 flex items-center justify-center p-2 md:p-6 bg-black/40 rounded-l-2xl">
                 <img
                   src={
                     selectedImage.img_src ||
@@ -93,10 +93,10 @@ const ImageGallery = ({ images, onImageClick, cameraTooltips = {} }) => {
                     selectedImage.camera?.name ||
                     "Mars Rover Image"
                   }
-                  className="w-full max-h-[70vh] object-contain rounded-lg shadow-lg"
+                  className="w-full max-h-[70vh] object-contain rounded-xl shadow-lg"
                 />
               </div>
-              <div className="flex-1 p-6 flex flex-col gap-2 text-white">
+              <div className="flex-1 p-4 md:p-8 flex flex-col gap-2 text-white">
                 <h3 className="text-2xl font-bold mb-2">
                   {selectedImage.camera?.full_name ||
                     selectedImage.camera?.name ||
@@ -137,7 +137,7 @@ const ImageGallery = ({ images, onImageClick, cameraTooltips = {} }) => {
                   }
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-block bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded transition-colors font-bold shadow"
+                  className="mt-4 inline-block bg-cyan-700 hover:bg-cyan-800 text-white py-2 px-4 rounded transition-colors font-bold shadow border border-cyan-400"
                   download
                 >
                   <i className="fas fa-download mr-2"></i>
