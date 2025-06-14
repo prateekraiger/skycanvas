@@ -1,75 +1,153 @@
-# SkyCanvas
+# SkyCanvas: Your Universe Explorer
 
-SkyCanvas is a modern web application for exploring and visualizing NASA's public data and imagery. It provides a beautiful, interactive interface to access Astronomy Picture of the Day (APOD), Mars Rover photos, EPIC Earth images, asteroid data, and NASA's media library.
+![SkyCanvas Screenshot/Demo](link-to-your-screenshot-or-gif-here)
 
-## Features
-- View Astronomy Picture of the Day (APOD)
-- Browse Mars Rover photos by date, camera, and rover
-- Explore EPIC (Earth Polychromatic Imaging Camera) images
-- Search and view NASA's media library
-- Asteroid (NeoWS) data and statistics
-- Fast, responsive UI built with React and Tailwind CSS
-- Backend API gateway with caching and rate limiting
+SkyCanvas is a modern, interactive web application designed to bring the wonders of NASA's public data and imagery directly to your browser. It serves as a personal gateway to explore the cosmos, offering a rich collection of features from daily astronomical pictures to detailed Mars Rover missions and asteroid tracking.
 
-## Tech Stack
-- **Frontend:** React, Vite, Tailwind CSS
-- **Backend:** Node.js, Express, Axios, Node-Cache
-- **APIs:** NASA Open APIs
+## ✨ Features
 
-## Getting Started
+- **Astronomy Picture of the Day (APOD):** Discover a new fascinating image or photograph of our universe daily.
+- **Mars Rover Gallery:** Dive into thousands of images captured by NASA's Curiosity, Opportunity, Spirit, and Perseverance rovers, with advanced filtering by rover, Martian day (sol), Earth date, and camera.
+- **Earth View (EPIC):** Explore stunning images of Earth from the DSCOVR satellite's Earth Polychromatic Imaging Camera (EPIC).
+- **NASA Media Library Search:** Search and browse NASA's extensive collection of images, videos, and audio.
+- **Asteroid Tracker (NeoWs):** Monitor near-Earth objects (NEOs) and visualize their data.
+- **Responsive & Intuitive UI:** Built with React and Tailwind CSS for a seamless experience across devices.
+- **Robust Backend API Gateway:** Features data fetching, caching, and rate limiting to optimize requests to NASA's APIs.
+
+## 🚀 Tech Stack
+
+- **Frontend:**
+  - [React](https://react.dev/): A JavaScript library for building user interfaces.
+  - [Vite](https://vitejs.dev/): A fast frontend build tool.
+  - [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapid UI development.
+- **Backend:**
+  - [Node.js](https://nodejs.org/): A JavaScript runtime built on Chrome's V8 JavaScript engine.
+  - [Express.js](https://expressjs.com/): A fast, unopinionated, minimalist web framework for Node.js.
+  - [Axios](https://axios-http.com/): Promise-based HTTP client for the browser and Node.js.
+  - [Node-Cache](https://www.npmjs.com/package/node-cache): A simple caching module for Node.js.
+- **APIs:**
+  - [NASA Open APIs](https://api.nasa.gov/): The primary data source for all astronomical and planetary data.
+
+## 📖 Getting Started
+
+Follow these steps to get SkyCanvas up and running on your local machine.
 
 ### Prerequisites
-- Node.js (v18+ recommended)
-- npm
 
-### Setup
+Ensure you have the following installed:
 
-#### 1. Clone the repository
-```sh
-git clone <your-repo-url>
-cd workspace
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+- [Git](https://git-scm.com/)
+
+### API Key Setup
+
+SkyCanvas utilizes NASA's public APIs, which require an API key to function. While a `DEMO_KEY` can be used for initial testing, it has strict rate limits. For stable operation and higher request limits, it is **highly recommended** to obtain your own API key.
+
+1.  **Get Your NASA API Key:**
+    Visit [https://api.nasa.gov/](https://api.nasa.gov/) and register for a free API key.
+
+2.  **Configure Backend API Key:**
+    Create a file named `.env` in the `backend/` directory (if it doesn't already exist) and add your NASA API key to it:
+    ```
+    NASA_API_KEY=YOUR_PERSONAL_NASA_API_KEY_HERE
+    ```
+    **Important:** This key is used by the backend to fetch data from NASA. Do not expose your personal API key directly in frontend code.
+
+### Installation & Running Locally
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/prateekraiger/skycanvas.git
+    cd skycanvas # Navigate into the project directory
+    ```
+
+2.  **Install Backend Dependencies & Start Server:**
+
+    ```bash
+    cd backend
+    npm install
+    npm run dev # Starts the backend in development mode (with nodemon)
+    # The backend will typically run on http://localhost:5000
+    ```
+
+3.  **Install Frontend Dependencies & Start Dev Server:**
+    In a **new terminal window/tab**, navigate to the `frontend` directory:
+
+    ```bash
+    cd ../frontend
+    npm install
+    npm run dev # Starts the frontend development server
+    # The frontend will typically run on http://localhost:5173
+    ```
+
+4.  **Open in Browser:**
+    Once both the backend and frontend servers are running, open your web browser and visit: `http://localhost:5173` (or the URL displayed in your frontend terminal).
+
+## ⚙️ Configuration
+
+Environment variables are used to manage sensitive information and configuration settings.
+
+- **`backend/.env`:**
+
+  - `NASA_API_KEY`: Your personal NASA API key.
+  - `PORT`: (Optional) Port for the backend server (default: `5000`).
+
+- **`frontend/.env`:** (You might need to create this file)
+  - `VITE_API_BASE_URL`: The URL of your backend API (e.g., `http://localhost:5000/api/nasa`). Vite prefixes client-side environment variables with `VITE_`.
+
+## 📂 Project Structure
+
+```
+skycanvas/
+├── backend/          # Node.js/Express API gateway
+│   ├── src/
+│   │   ├── config/      # API configuration (e.g., NASA API key setup)
+│   │   ├── controllers/ # Logic for handling API requests
+│   │   ├── middlewares/ # Express middleware (e.g., rate limiting)
+│   │   ├── routes/      # API route definitions
+│   │   └── utils/       # Utility functions (e.g., response formatting, caching)
+│   ├── .env          # Backend environment variables
+│   ├── package.json
+│   └── server.js     # Main backend server entry point
+├── frontend/         # React web application
+│   ├── public/        # Static assets
+│   ├── src/
+│   │   ├── components/  # Reusable React components
+│   │   │   └── common/  # Generic, widely used components
+│   │   ├── pages/       # Page-specific components (e.g., MarsRoverPage)
+│   │   ├── services/    # API service for frontend-to-backend communication
+│   │   ├── App.jsx      # Main React application component
+│   │   ├── main.jsx     # React entry point
+│   │   └── index.css    # Global CSS styles
+│   ├── .env          # Frontend environment variables
+│   ├── package.json
+│   ├── tailwind.config.js
+│   └── vite.config.js
+├── .gitignore        # Specifies intentionally untracked files to ignore
+├── LICENSE           # Project license information
+└── README.md         # Project overview and documentation
 ```
 
-#### 2. Backend Setup
-```sh
-cd backend
-npm install
-# Start the backend server (development mode)
-npm run dev
-```
+## ▶️ Available Scripts
 
-#### 3. Frontend Setup
-```sh
-cd ../frontend
-npm install
-# Start the frontend dev server
-npm run dev
-```
+From the respective `backend/` or `frontend/` directories, you can run:
 
-#### 4. Open in Browser
-Visit [http://localhost:5173](http://localhost:5173) (or the port shown in your terminal) to use SkyCanvas.
+- `npm install`: Installs project dependencies.
+- `npm run dev`: Starts the development server with hot-reloading.
+- `npm start`: (Backend only) Starts the application in production mode.
+- `npm test`: (If configured) Runs tests.
 
-## Configuration
-- **Backend:**
-  - NASA API key and base URL are set in `backend/.env`.
-  - Rate limiting is disabled in development for smooth local use.
-- **Frontend:**
-  - API base URL is set in `frontend/.env` as `VITE_API_BASE_URL`.
+## 🤝 Contributing
 
-## Scripts
-- `npm run dev` — Start dev server (frontend or backend)
-- `npm start` — Start production server (backend only)
+Contributions are welcome! Please feel free to open issues, submit pull requests, or suggest improvements. For major changes, please open an issue first to discuss what you would like to change.
 
-## Project Structure
-```
-workspace/
-  backend/    # Express API gateway
-  frontend/   # React web app
-```
+## 📄 License
 
-## Credits
-- Built by the SkyCanvas Team
-- Powered by NASA Open APIs
+This project is licensed under the [MIT License](LICENSE).
 
-## License
-MIT
+## 🙏 Credits
+
+- Developed by [Your Name/Team Name]
+- Powered by [NASA Open APIs](https://api.nasa.gov/)
