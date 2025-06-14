@@ -1,42 +1,76 @@
-/* From Uiverse.io by 20essentials */
-.container-loader {
+/* Larger blue loader */
+.loader {
+  width: 220px;
+  height: 44px;
+  box-shadow: 0 6px 0 #2196f3;
   position: relative;
-  transform-style: preserve-3d;
-  overflow: hidden;
-  transform: translateX(0%);
-  animation: perspective 20s linear infinite both;
+  clip-path: inset(-88px 0 -11px);
+}
 
-  &,
-  .loader {
-    height: 100%;
-    width: 100%;
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: auto calc(50% - 38px) 0;
+  height: 110px;
+  --g: no-repeat linear-gradient(#2196f3 0 0);
+  background: var(--g), var(--g), var(--g), var(--g);
+  background-size: 36px 32px;
+  animation:
+    move 2s infinite linear,
+    move2 2s infinite linear;
+}
+
+@keyframes move {
+
+  0%,
+  100% {
+    background-position:
+      0 -110px,
+      100% -110px;
   }
 
-  .loader {
-    --color: #00f;
-    position: absolute;
-    background: repeating-linear-gradient(
-        transparent 0 30px,
-        var(--color) 31px 32px
-      ),
-      repeating-linear-gradient(
-        to right,
-        transparent 0 30px,
-        var(--color) 31px 32px
-      );
-    border-left: 1px solid var(--color);
-    border-top: 1px solid var(--color);
-    transform: rotateX(37deg);
-    top: 0;
+  17.5% {
+    background-position:
+      0 100%,
+      100% -110px,
+      0 -110px,
+      100% -110px;
+  }
+
+  35% {
+    background-position:
+      0 100%,
+      100% 100%,
+      0 -110px,
+      100% -110px;
+  }
+
+  52.5% {
+    background-position:
+      0 100%,
+      100% 100%,
+      0 calc(100% - 36px),
+      100% -110px;
+  }
+
+  70%,
+  98% {
+    background-position:
+      0 100%,
+      100% 100%,
+      0 calc(100% - 36px),
+      100% calc(100% - 36px);
   }
 }
 
-@keyframes perspective {
-  0% {
-    perspective: 1px;
+@keyframes move2 {
+
+  0%,
+  70% {
+    transform: translate(0);
   }
 
   100% {
-    perspective: 50px;
+    transform: translate(200%);
   }
 }

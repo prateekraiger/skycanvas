@@ -2,11 +2,7 @@ import React from "react";
 import "../components/ui/loader.css";
 
 const Loader = () => {
-  return (
-    <main className="container-loader">
-      <aside className="loader"></aside>
-    </main>
-  );
+  return <div className="loader"></div>;
 };
 
 export default Loader;

@@ -21,18 +21,13 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <NavLink to="/" className="flex items-center gap-2 select-none">
-            <motion.div
-              whileHover={{ scale: 1.08 }}
-              transition={{ duration: 0.2 }}
-            >
-              {/* {Logo ? <Logo /> : */}
-              <i className="fas fa-rocket text-cyan-400 text-2xl"></i>
-              {/* } */}
-            </motion.div>
-            <span
-              className="font-black text-xl tracking-wide heading"
-              style={{ fontFamily: "Merriweather, serif" }}
-            >
+            <img
+              src="/logo.png"
+              alt="SkyCanvas Logo"
+              className="h-16 w-auto"
+              style={{ maxHeight: "56px" }}
+            />
+            <span className="font-black text-2xl tracking-wide heading">
               SkyCanvas
             </span>
           </NavLink>
