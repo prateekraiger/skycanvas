@@ -35,17 +35,9 @@ SkyCanvas is a modern, interactive web application designed to bring the wonders
 
 Follow these steps to get SkyCanvas up and running on your local machine.
 
-### Prerequisites
-
-Ensure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- [npm](https://www.npmjs.com/) (comes with Node.js)
-- [Git](https://git-scm.com/)
-
 ### API Key Setup
 
-SkyCanvas utilizes NASA's public APIs, which require an API key to function. While a `DEMO_KEY` can be used for initial testing, it has strict rate limits. For stable operation and higher request limits, it is **highly recommended** to obtain your own API key.
+SkyCanvas utilizes NASA's public APIs, which require an API key to function.
 
 1. **Get Your NASA API Key:**
    Visit [https://api.nasa.gov/](https://api.nasa.gov/) and register for a free API key.
