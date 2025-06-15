@@ -86,6 +86,11 @@ export default function AsteroidsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [asteroidDailyCounts, setAsteroidDailyCounts] = useState([]);
+  const [displayLimit, setDisplayLimit] = useState(20);
+
+  const handleLoadMore = () => {
+    setDisplayLimit((prevLimit) => prevLimit + 20);
+  };
 
   // Calculate max end date based on start date and today
   const maxEndDate = (() => {
@@ -135,6 +140,7 @@ export default function AsteroidsPage() {
     setIsLoading(true);
     setAsteroids([]);
     setAsteroidDailyCounts([]);
+    setDisplayLimit(20);
     try {
       const response = await apiService.getAsteroidsFeed(startDate, endDate);
       // NeoWs returns an object with near_earth_objects: { date: [asteroid, ...], ... }
@@ -248,102 +254,89 @@ export default function AsteroidsPage() {
                       Rel. Velocity (km/s)
                     </th>
                     <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-center font-bold uppercase tracking-wider">
-                      Hazardous?
-                    </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
-                      Orbiting Body
-                    </th>
-                    <th className="px-4 py-3 border-b border-[#23244a] text-cyan-300 text-left font-bold uppercase tracking-wider">
-                      NASA JPL URL
+                      Details
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {asteroids.map((a, i) => {
-                    const approach = a.close_approach_data?.[0] || {};
-                    return (
-                      <tr
-                        key={a.id}
-                        className={
-                          "transition-all duration-200 " +
-                          (i % 2 === 0
-                            ? "bg-black/60 hover:bg-white/10"
-                            : "bg-[#23244a]/60 hover:bg-white/10")
-                        }
-                      >
-                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] font-semibold text-cyan-100">
-                          {a.name}
-                        </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200">
-                          {approach.close_approach_date || "-"}
-                        </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200 text-right">
-                          {a.absolute_magnitude_h}
-                        </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200 text-right">
-                          {a.estimated_diameter?.meters?.estimated_diameter_min?.toFixed(
-                            1
-                          )}{" "}
-                          -{" "}
-                          {a.estimated_diameter?.meters?.estimated_diameter_max?.toFixed(
-                            1
-                          )}
-                        </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200 text-right">
-                          {approach.miss_distance?.kilometers
-                            ? Number(
-                                approach.miss_distance.kilometers
-                              ).toLocaleString()
-                            : "-"}
-                        </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200 text-right">
-                          {approach.relative_velocity?.kilometers_per_second
-                            ? Number(
-                                approach.relative_velocity.kilometers_per_second
-                              ).toFixed(2)
-                            : "-"}
-                        </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-center">
-                          <span
-                            className={
-                              a.is_potentially_hazardous_asteroid
-                                ? "bg-red-700 text-red-200 px-3 py-1 rounded-full text-xs font-bold"
-                                : "bg-green-800 text-green-200 px-3 py-1 rounded-full text-xs font-bold"
-                            }
-                          >
-                            {a.is_potentially_hazardous_asteroid ? "Yes" : "No"}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-gray-200">
-                          {approach.orbiting_body || "-"}
-                        </td>
-                        <td className="px-4 py-3 border-b border-[#23244a]">
-                          <a
-                            href={a.nasa_jpl_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-cyan-400 underline hover:text-cyan-200 transition-colors"
-                          >
-                            View
-                          </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {asteroids.slice(0, displayLimit).map((a, index) => (
+                    <tr
+                      key={a.id}
+                      className={`transition-colors duration-300 ${
+                        index % 2 === 0 ? "bg-[#181929]" : "bg-[#1b1c30]"
+                      } hover:bg-white/10`}
+                    >
+                      <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-left">
+                        {a.name}
+                      </td>
+                      <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-left">
+                        {a.close_approach_data?.[0]?.close_approach_date || "-"}
+                      </td>
+                      <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-center">
+                        {a.absolute_magnitude_h}
+                      </td>
+                      <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-center">
+                        {a.estimated_diameter?.meters?.estimated_diameter_min?.toFixed(
+                          1
+                        )}{" "}
+                        -{" "}
+                        {a.estimated_diameter?.meters?.estimated_diameter_max?.toFixed(
+                          1
+                        )}
+                      </td>
+                      <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-center">
+                        {a.close_approach_data?.[0]?.miss_distance?.kilometers
+                          ? Number(
+                              a.close_approach_data[0].miss_distance.kilometers
+                            ).toLocaleString()
+                          : "-"}
+                      </td>
+                      <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-center">
+                        {a.close_approach_data?.[0]?.relative_velocity
+                          ?.kilometers_per_second
+                          ? Number(
+                              a.close_approach_data[0].relative_velocity
+                                .kilometers_per_second
+                            ).toFixed(2)
+                          : "-"}
+                      </td>
+                      <td className="px-4 py-3 border-b border-[#23244a] border-r border-r-[#23244a] text-center">
+                        <a
+                          href={a.nasa_jpl_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-cyan-400 hover:text-cyan-200 transition-colors"
+                        >
+                          View
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            {/* Card layout for mobile */}
+
+            {/* Mobile Cards */}
             <div className="md:hidden">
-              {asteroids.map((a) => (
+              {asteroids.slice(0, displayLimit).map((a) => (
                 <AsteroidCard key={a.id} a={a} />
               ))}
             </div>
+            {asteroids.length > displayLimit && (
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={handleLoadMore}
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+                >
+                  Load More ({asteroids.length - displayLimit} remaining)
+                </button>
+              </div>
+            )}
           </>
         ) : (
-          <div className="text-gray-400 text-center mt-8">
-            No asteroids found for this date range.
-          </div>
+          <p className="text-center text-gray-400 text-xl mt-8">
+            No asteroids found for the selected date range.
+          </p>
         )}
       </div>
     </div>

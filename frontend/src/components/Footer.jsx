@@ -56,14 +56,14 @@ const Footer = () => (
             Mars Rover
           </NavLink>
           <NavLink
-            to="/epic"
+            to="/asteroids"
             className={({ isActive }) =>
               `text-gray-300 hover:text-cyan-400 transition-colors${
                 isActive ? " font-bold text-cyan-400" : ""
               }`
             }
           >
-            Earth View
+            Asteroids
           </NavLink>
           <NavLink
             to="/media-library"
