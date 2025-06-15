@@ -30,7 +30,7 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
       {/* Button Component */}
       <button
         onClick={onClick}
-        className="relative inline-block cursor-pointer border-2 border-cyan-400 px-4 py-2 text-sm font-bold uppercase tracking-wider text-cyan-400 transition-all duration-700 ease-in-out hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 rounded-lg"
+        className="relative inline-block cursor-pointer border-2 border-cyan-400 px-4 py-2 text-sm font-bold uppercase tracking-wider text-cyan-400 transition-all duration-700 ease-in-out hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 rounded-lg group"
         style={{ zIndex: 1 }}
       >
         {children}
@@ -45,7 +45,7 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
         >
           {/* Blob 1 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out"
+            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0"
             style={{
               left: "-5%",
               transform: "scale(1.4) translateY(125%) translateZ(0)",
@@ -54,7 +54,7 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
 
           {/* Blob 2 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out"
+            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0"
             style={{
               left: "30%",
               transform: "scale(1.4) translateY(125%) translateZ(0)",
@@ -64,7 +64,7 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
 
           {/* Blob 3 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out"
+            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0"
             style={{
               left: "66%",
               transform: "scale(1.4) translateY(125%) translateZ(0)",
@@ -72,13 +72,6 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
             }}
           />
         </div>
-
-        {/* Hover effect styles */}
-        <style jsx>{`
-          button:hover div[style*="translateY(125%)"] {
-            transform: scale(1.4) translateY(0) translateZ(0) !important;
-          }
-        `}</style>
       </button>
     </>
   );

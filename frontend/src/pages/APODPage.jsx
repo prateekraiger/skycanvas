@@ -15,6 +15,15 @@ const APODPage = () => {
   // APOD started on June 16, 1995
   const minDate = "1995-06-16";
 
+  // Ensure selectedDate is not in the future on mount or when changed
+  useEffect(() => {
+    const currentMaxDate = new Date(maxDate);
+    const currentSelectedDate = new Date(selectedDate);
+    if (currentSelectedDate > currentMaxDate) {
+      setSelectedDate(currentMaxDate);
+    }
+  }, [selectedDate, maxDate]);
+
   useEffect(() => {
     const loadAPODData = async (dateStr) => {
       try {
@@ -33,8 +42,18 @@ const APODPage = () => {
       }
     };
 
+    // Ensure selectedDate is not in the future before formatting and calling API
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize to start of day
+    let dateToFetch = selectedDate;
+
+    if (selectedDate.getTime() > today.getTime()) {
+      setSelectedDate(today); // Set state to today if it was in the future
+      dateToFetch = today; // Use today for the current API call
+    }
+
     // Format date as YYYY-MM-DD for the API
-    const formattedDate = selectedDate.toISOString().split("T")[0];
+    const formattedDate = dateToFetch.toISOString().split("T")[0];
     loadAPODData(formattedDate);
   }, [selectedDate]);
 
