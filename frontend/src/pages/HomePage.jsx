@@ -3,6 +3,7 @@ import apiService from "../services/ApiService";
 import LoadingIndicator from "../components/common/LoadingIndicator";
 import Hero from "../components/Hero";
 import About from "../components/About";
+import CallToAction from "../components/CallToAction";
 
 const HomePage = () => {
   const [apodData, setApodData] = useState(null);
@@ -37,6 +38,9 @@ const HomePage = () => {
 
         {/* About Section (now main content) */}
         <About />
+
+        {/* Call to Action Section */}
+        <CallToAction />
       </div>
     </div>
   );

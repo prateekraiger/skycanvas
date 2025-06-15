@@ -32,18 +32,18 @@ const features = [
 
 const About = () => {
   return (
-    <section className="relative mt-0 lg:-mt-40 mb-0 pt-0">
+    <section className="relative mt-10 lg:mt-20 mb-10 pt-0">
       <div className="relative p-0 md:p-0 rounded-3xl shadow-none border-none overflow-visible bg-transparent">
-        <div className="relative z-10 flex flex-col lg:flex-row-reverse gap-0 items-center">
+        <div className="relative z-10 flex flex-col lg:flex-row-reverse gap-16 items-center">
           {/* Content section */}
           <div className="flex-1 space-y-8">
             {/* AnimatedTitle heading */}
             <AnimatedTitle text1="About " text2="SkyCanvas" />
             {/* Description with better typography */}
-            <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+            <div className="space-y-6 text-xl md:text-2xl text-gray-300 leading-normal tracking-wide">
               <p className="text-xl text-gray-200">
                 Your{" "}
-                <span className="font-bold text-cyan-300">
+                <span className="font-extrabold text-cyan-300 drop-shadow-md">
                   interactive gateway
                 </span>{" "}
                 to the wonders of space, powered by NASA's cutting-edge APIs.
@@ -73,20 +73,6 @@ const About = () => {
                   </p>
                 </Link>
               ))}
-            </div>
-            {/* Call to action */}
-            <div className="flex flex-wrap gap-4 pt-6">
-              <div className="flex items-center gap-3 text-gray-400">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm">Powered by NASA APIs</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-400">
-                <div
-                  className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"
-                  style={{ animationDelay: "0.5s" }}
-                ></div>
-                <span className="text-sm">Open Source & Free</span>
-              </div>
             </div>
           </div>
           {/* Visual element - Compact Cube Spinner */}
