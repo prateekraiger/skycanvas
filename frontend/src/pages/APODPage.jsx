@@ -113,7 +113,7 @@ const APODPage = () => {
             <div className="flex justify-center py-12">
               <LoadingIndicator
                 isLoading={isLoading}
-                message="Loading astronomy picture..."
+                msg="Loading astronomy picture..."
               />
             </div>
           ) : error ? (

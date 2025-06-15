@@ -90,7 +90,7 @@ const MediaLibraryPage = () => {
         {isLoading ? (
           <LoadingIndicator
             isLoading={isLoading}
-            message="Loading media results..."
+            msg="Loading data from NASA..."
           />
         ) : error ? (
           <div className="bg-red-900/30 border border-red-700 text-red-200 px-4 py-3 rounded mb-8">

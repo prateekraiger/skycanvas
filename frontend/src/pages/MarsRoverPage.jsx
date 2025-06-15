@@ -259,7 +259,7 @@ const MarsRoverPage = () => {
         {isLoading && page === 1 ? (
           <LoadingIndicator
             isLoading={isLoading}
-            message="Loading Mars Rover images..."
+            msg="Loading Mars Rover images..."
           />
         ) : error ? (
           <div className="bg-red-900/30 border border-red-700 text-red-200 px-4 py-3 rounded mb-8">
@@ -282,7 +282,7 @@ const MarsRoverPage = () => {
               <div className="flex justify-center mt-4">
                 <LoadingIndicator
                   isLoading={isLoading}
-                  message="Loading more images..."
+                  msg="Loading more Mars Rover images..."
                 />
               </div>
             )}

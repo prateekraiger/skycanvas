@@ -199,7 +199,7 @@ export default function AsteroidsPage() {
         {isLoading ? (
           <LoadingIndicator
             isLoading={isLoading}
-            message="Loading asteroids..."
+            msg="Loading asteroids near Earth..."
           />
         ) : asteroids.length > 0 ? (
           <>
