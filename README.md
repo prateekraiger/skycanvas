@@ -2,16 +2,16 @@
 
 ![SkyCanvas Screenshot](https://res.cloudinary.com/dk3pg4zly/image/upload/v1749980379/skycanvas_sbthc3.png)
 
-**SkyCanvas** is a sleek, interactive web application that brings NASA's open data to life. Whether you're curious about today’s astronomy picture, exploring Mars Rover missions, or monitoring near-Earth asteroids — SkyCanvas makes space exploration accessible and fun.
+**SkyCanvas** is a sleek, interactive web application that brings NASA's open data to life. Whether you're curious about today's astronomy picture, exploring Mars Rover missions, or monitoring near-Earth asteroids — SkyCanvas makes space exploration accessible and fun.
 
 ---
 
 ## ✨ Features
 
 - 🔭 **Astronomy Picture of the Day (APOD):** Discover a new image of the cosmos daily with rich descriptions.
-- 🚜 **Mars Rover Explorer:** Browse photos from NASA’s rovers – Curiosity, Perseverance, Spirit, and Opportunity – with filters for Martian day (sol), Earth date, and camera.
+- 🚜 **Mars Rover Explorer:** Browse photos from NASA's rovers – Curiosity, Perseverance, Spirit, and Opportunity – with filters for Martian day (sol), Earth date, and camera.
 - ☄️ **Asteroid Tracker:** Track near-Earth objects with real-time orbital data and close approach information.
-- 📸 **NASA Media Library:** Search and view NASA’s vast collection of images, videos, and audio.
+- 📸 **NASA Media Library:** Search and view NASA's vast collection of images, videos, and audio.
 - 🧠 **Optimized Backend Gateway:** Smart caching and rate-limiting to efficiently serve data.
 - 💡 **Responsive UI:** Built with Tailwind CSS and optimized for all screen sizes.
 
@@ -53,8 +53,6 @@ git clone https://github.com/yourname/skycanvas.git
 cd skycanvas
 ```
 
-````
-
 ---
 
 ### 3. Backend Setup
@@ -63,7 +61,6 @@ cd skycanvas
 cd backend
 npm install
 ```
-````
 
 Create a `.env` file in the `backend` folder and add:
 
