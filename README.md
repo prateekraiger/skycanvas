@@ -52,6 +52,7 @@ Sign up at [https://api.nasa.gov/](https://api.nasa.gov/) and obtain a free API 
 git clone https://github.com/yourname/skycanvas.git
 cd skycanvas
 ```
+
 ````
 
 ---
@@ -62,6 +63,7 @@ cd skycanvas
 cd backend
 npm install
 ```
+````
 
 Create a `.env` file in the `backend` folder and add:
 
