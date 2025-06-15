@@ -3,6 +3,7 @@ import apiService from "../services/ApiService";
 import LoadingIndicator from "../components/common/LoadingIndicator";
 import AnimatedTitle from "../components/AnimatedTitle";
 import SearchBtn from "../components/SearchBtn";
+import AsteroidDailyCountChart from "../components/AsteroidDailyCountChart";
 
 const today = new Date();
 const todayStr = today.toISOString().split("T")[0];
@@ -84,6 +85,7 @@ export default function AsteroidsPage() {
   const [asteroids, setAsteroids] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [asteroidDailyCounts, setAsteroidDailyCounts] = useState([]);
 
   // Calculate max end date based on start date and today
   const maxEndDate = (() => {
@@ -132,6 +134,7 @@ export default function AsteroidsPage() {
     }
     setIsLoading(true);
     setAsteroids([]);
+    setAsteroidDailyCounts([]);
     try {
       const response = await apiService.getAsteroidsFeed(startDate, endDate);
       // NeoWs returns an object with near_earth_objects: { date: [asteroid, ...], ... }
@@ -139,8 +142,23 @@ export default function AsteroidsPage() {
         response.data.near_earth_objects || {}
       ).flat();
       setAsteroids(allAsteroids);
+
+      // Process data for daily asteroid counts chart
+      const dailyCountsMap = {};
+      for (const date in response.data.near_earth_objects) {
+        dailyCountsMap[date] = response.data.near_earth_objects[date].length;
+      }
+      // Convert map to array for chart, sorted by date
+      const sortedDailyCounts = Object.keys(dailyCountsMap)
+        .sort()
+        .map((date) => ({
+          date: date,
+          count: dailyCountsMap[date],
+        }));
+      setAsteroidDailyCounts(sortedDailyCounts);
     } catch (err) {
       setError("Failed to fetch asteroids. Please try again.");
+      setAsteroidDailyCounts([]);
     } finally {
       setIsLoading(false);
     }
@@ -203,6 +221,9 @@ export default function AsteroidsPage() {
           />
         ) : asteroids.length > 0 ? (
           <>
+            {/* Add the daily asteroid count chart */}
+            <AsteroidDailyCountChart asteroidData={asteroidDailyCounts} />
+
             {/* Table for md+ screens, cards for mobile */}
             <div className="hidden md:block overflow-x-auto rounded-xl border border-[#23244a] bg-[#181929] shadow-lg">
               <table className="min-w-full text-sm">

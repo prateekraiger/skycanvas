@@ -30,44 +30,45 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
       {/* Button Component */}
       <button
         onClick={onClick}
-        className="relative inline-block cursor-pointer border-2 border-cyan-400 px-4 py-2 text-sm font-bold uppercase tracking-wider text-cyan-400 transition-all duration-700 ease-in-out hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 rounded-lg group"
+        className="relative inline-block cursor-pointer border-2 border-cyan-400 px-4 py-2 text-sm font-bold uppercase tracking-wider text-cyan-400 transition-all duration-700 ease-in-out hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 rounded-lg group overflow-hidden"
         style={{ zIndex: 1 }}
       >
-        {children}
+        <span className="relative z-10 block pointer-events-auto">
+          {children}
+        </span>
 
         {/* Gooey blobs container */}
         <div
-          className="absolute -bottom-1 -right-px left-0 top-0 h-full overflow-hidden"
+          className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
           style={{
             filter: "url(#goo)",
             zIndex: -1,
+            bottom: "-3px",
+            right: "-1px",
           }}
         >
           {/* Blob 1 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0"
+            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0 transform scale-[1.4] translate-y-[125%]"
             style={{
               left: "-5%",
-              transform: "scale(1.4) translateY(125%) translateZ(0)",
             }}
           />
 
           {/* Blob 2 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0"
+            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0 transform scale-[1.4] translate-y-[125%]"
             style={{
               left: "30%",
-              transform: "scale(1.4) translateY(125%) translateZ(0)",
               transitionDelay: "60ms",
             }}
           />
 
           {/* Blob 3 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0"
+            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0 transform scale-[1.4] translate-y-[125%]"
             style={{
               left: "66%",
-              transform: "scale(1.4) translateY(125%) translateZ(0)",
               transitionDelay: "25ms",
             }}
           />
