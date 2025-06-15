@@ -5,24 +5,55 @@ import AnimatedTitle from "../components/AnimatedTitle";
 
 const APODPage = () => {
   const [apodData, setApodData] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  // Calculate today's date once at component initialization, normalized to start of day
+  const getTodayNormalized = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize to start of today, local time
+    return today;
+  };
+  // Initialize selectedDate to today's date
+  const [selectedDate, setSelectedDate] = useState(getTodayNormalized);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Calculate the maximum date (today)
-  const maxDate = new Date().toISOString().split("T")[0];
+  // Calculate the maximum date (today) in YYYY-MM-DD format for the input field
+  const maxDate = (() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  })();
 
   // APOD started on June 16, 1995
   const minDate = "1995-06-16";
 
-  // Ensure selectedDate is not in the future on mount or when changed
+  // Helper to format Date objects to YYYY-MM-DD in local time
+  const formatDateToYYYYMMDD = (date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  // Effect to ensure selectedDate is always within valid bounds and defaults to today if appropriate
   useEffect(() => {
-    const currentMaxDate = new Date(maxDate);
-    const currentSelectedDate = new Date(selectedDate);
-    if (currentSelectedDate > currentMaxDate) {
-      setSelectedDate(currentMaxDate);
+    const today = getTodayNormalized();
+    const minD = new Date(minDate);
+    minD.setHours(0, 0, 0, 0); // Normalize minDate to start of day
+
+    // If selectedDate is in the future, set it to today
+    if (selectedDate.getTime() > today.getTime()) {
+      setSelectedDate(today);
+      return; // Exit to re-run effect with corrected date
     }
-  }, [selectedDate, maxDate]);
+
+    // If selectedDate is before minDate, set it to minDate
+    if (selectedDate.getTime() < minD.getTime()) {
+      setSelectedDate(minD);
+      return; // Exit to re-run effect with corrected date
+    }
+  }, [selectedDate, minDate, maxDate]); // Depend on selectedDate, minDate, maxDate
 
   useEffect(() => {
     const loadAPODData = async (dateStr) => {
@@ -42,32 +73,25 @@ const APODPage = () => {
       }
     };
 
-    // Ensure selectedDate is not in the future before formatting and calling API
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // Normalize to start of day
-    let dateToFetch = selectedDate;
-
-    if (selectedDate.getTime() > today.getTime()) {
-      setSelectedDate(today); // Set state to today if it was in the future
-      dateToFetch = today; // Use today for the current API call
-    }
-
-    // Format date as YYYY-MM-DD for the API
-    const formattedDate = dateToFetch.toISOString().split("T")[0];
+    // Use the potentially corrected selectedDate for fetching
+    const formattedDate = formatDateToYYYYMMDD(selectedDate);
     loadAPODData(formattedDate);
-  }, [selectedDate]);
+  }, [selectedDate]); // Only selectedDate in dependency, as other bounding is handled by the other useEffect
 
   const handleDateChange = (e) => {
-    setSelectedDate(new Date(e.target.value));
+    const newDate = new Date(e.target.value);
+    newDate.setHours(0, 0, 0, 0); // Normalize to start of selected day
+    setSelectedDate(newDate);
   };
 
   const handlePreviousDay = () => {
     const prevDay = new Date(selectedDate);
     prevDay.setDate(prevDay.getDate() - 1);
+    prevDay.setHours(0, 0, 0, 0); // Normalize to start of previous day
 
-    // Prevent going before the first APOD
-    const minDateTime = new Date(minDate).getTime();
-    if (prevDay.getTime() >= minDateTime) {
+    const minDateTime = new Date(minDate);
+    minDateTime.setHours(0, 0, 0, 0); // Normalize minDate
+    if (prevDay.getTime() >= minDateTime.getTime()) {
       setSelectedDate(prevDay);
     }
   };
@@ -75,14 +99,19 @@ const APODPage = () => {
   const handleNextDay = () => {
     const nextDay = new Date(selectedDate);
     nextDay.setDate(nextDay.getDate() + 1);
+    nextDay.setHours(0, 0, 0, 0); // Normalize to start of next day
 
-    // Prevent going into the future
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = getTodayNormalized(); // Use the consistent way to get today
     if (nextDay.getTime() <= today.getTime()) {
       setSelectedDate(nextDay);
     }
   };
+
+  console.log("APODPage: maxDate", maxDate);
+  console.log(
+    "APODPage: selectedDate",
+    selectedDate.toISOString().split("T")[0]
+  );
 
   return (
     <div className="min-h-screen ">
@@ -94,9 +123,7 @@ const APODPage = () => {
           <button
             onClick={handlePreviousDay}
             className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors"
-            disabled={
-              new Date(selectedDate).toISOString().split("T")[0] === minDate
-            }
+            disabled={formatDateToYYYYMMDD(selectedDate) === minDate}
           >
             <i className="fas fa-chevron-left mr-2"></i>
             Previous Day
@@ -107,7 +134,7 @@ const APODPage = () => {
               type="date"
               min={minDate}
               max={maxDate}
-              value={selectedDate.toISOString().split("T")[0]}
+              value={formatDateToYYYYMMDD(selectedDate)}
               onChange={handleDateChange}
               className="bg-[#181929] text-white py-1 px-2 rounded border border-[#23244a] focus:outline-none focus:border-cyan-400 transition-colors duration-200 shadow-sm"
               style={{ colorScheme: "dark", WebkitColorScheme: "dark" }}
@@ -117,9 +144,7 @@ const APODPage = () => {
           <button
             onClick={handleNextDay}
             className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors"
-            disabled={
-              new Date(selectedDate).toISOString().split("T")[0] === maxDate
-            }
+            disabled={formatDateToYYYYMMDD(selectedDate) === maxDate}
           >
             Next Day
             <i className="fas fa-chevron-right ml-2"></i>
