@@ -11,8 +11,10 @@ const APODPage = () => {
     today.setHours(0, 0, 0, 0); // Normalize to start of today, local time
     return today;
   };
-  // Initialize selectedDate to today's date
+  // Initialize selectedDate to today's date (from date picker / UI)
   const [selectedDate, setSelectedDate] = useState(getTodayNormalized);
+  // This state will hold the date that is actually used for API fetching, always validated.
+  const [dateToFetch, setDateToFetch] = useState(getTodayNormalized);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -36,47 +38,61 @@ const APODPage = () => {
     return `${year}-${month}-${day}`;
   };
 
-  // Effect to ensure selectedDate is always within valid bounds and defaults to today if appropriate
+  // Effect to validate selectedDate and set dateToFetch
   useEffect(() => {
     const today = getTodayNormalized();
     const minD = new Date(minDate);
     minD.setHours(0, 0, 0, 0); // Normalize minDate to start of day
 
+    let newDateToFetch = selectedDate;
+
     // If selectedDate is in the future, set it to today
     if (selectedDate.getTime() > today.getTime()) {
-      setSelectedDate(today);
-      return; // Exit to re-run effect with corrected date
+      newDateToFetch = today;
     }
-
     // If selectedDate is before minDate, set it to minDate
-    if (selectedDate.getTime() < minD.getTime()) {
-      setSelectedDate(minD);
-      return; // Exit to re-run effect with corrected date
+    else if (selectedDate.getTime() < minD.getTime()) {
+      newDateToFetch = minD;
     }
-  }, [selectedDate, minDate, maxDate]); // Depend on selectedDate, minDate, maxDate
 
+    // Only update dateToFetch if it's different to prevent unnecessary API calls
+    if (dateToFetch.getTime() !== newDateToFetch.getTime()) {
+      setDateToFetch(newDateToFetch);
+    }
+  }, [selectedDate, minDate, dateToFetch]); // Depend on selectedDate and minDate
+
+  // Effect to fetch APOD data based on the validated dateToFetch
   useEffect(() => {
-    const loadAPODData = async (dateStr) => {
+    const loadAPODData = async () => {
       try {
         setIsLoading(true);
-        const response = await apiService.getAPOD(dateStr);
+        const formattedDate = formatDateToYYYYMMDD(dateToFetch);
+        const response = await apiService.getAPOD(formattedDate);
         setApodData(response.data);
         setError(null);
       } catch (err) {
-        console.error("Failed to load APOD data:", err);
-        setError(
-          `Failed to load APOD for date ${dateStr}. Please try another date.`
-        );
+        // If it's a 404 (Not Found) error, show specific message
+        if (err.status === 404) {
+          setError(
+            "NASA hasn't uploaded the Astronomy Picture of the Day for this date yet. Please try again later or select a previous date."
+          );
+        } else {
+          // For other errors, show the API message or a generic one
+          setError(
+            err.message ||
+              `Failed to load APOD for date ${formatDateToYYYYMMDD(
+                dateToFetch
+              )}. Please try another date.`
+          );
+        }
         setApodData(null);
       } finally {
         setIsLoading(false);
       }
     };
 
-    // Use the potentially corrected selectedDate for fetching
-    const formattedDate = formatDateToYYYYMMDD(selectedDate);
-    loadAPODData(formattedDate);
-  }, [selectedDate]); // Only selectedDate in dependency, as other bounding is handled by the other useEffect
+    loadAPODData();
+  }, [dateToFetch]); // Removed attemptedFallback from dependency
 
   const handleDateChange = (e) => {
     const newDate = new Date(e.target.value);
@@ -89,11 +105,7 @@ const APODPage = () => {
     prevDay.setDate(prevDay.getDate() - 1);
     prevDay.setHours(0, 0, 0, 0); // Normalize to start of previous day
 
-    const minDateTime = new Date(minDate);
-    minDateTime.setHours(0, 0, 0, 0); // Normalize minDate
-    if (prevDay.getTime() >= minDateTime.getTime()) {
-      setSelectedDate(prevDay);
-    }
+    setSelectedDate(prevDay);
   };
 
   const handleNextDay = () => {
@@ -101,17 +113,8 @@ const APODPage = () => {
     nextDay.setDate(nextDay.getDate() + 1);
     nextDay.setHours(0, 0, 0, 0); // Normalize to start of next day
 
-    const today = getTodayNormalized(); // Use the consistent way to get today
-    if (nextDay.getTime() <= today.getTime()) {
-      setSelectedDate(nextDay);
-    }
+    setSelectedDate(nextDay);
   };
-
-  console.log("APODPage: maxDate", maxDate);
-  console.log(
-    "APODPage: selectedDate",
-    selectedDate.toISOString().split("T")[0]
-  );
 
   return (
     <div className="min-h-screen ">
