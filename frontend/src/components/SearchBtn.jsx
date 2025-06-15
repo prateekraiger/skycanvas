@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SearchBtn = ({ onClick, children = "Search" }) => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = (e) => {
+    setIsClicked(true);
+    if (onClick) {
+      onClick(e);
+    }
+
+    // Reset animation state after duration
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 700);
+  };
+
   return (
     <>
       {/* SVG Filter for gooey effect */}
@@ -29,9 +43,8 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
 
       {/* Button Component */}
       <button
-        onClick={onClick}
-        className="relative inline-block cursor-pointer border-2 border-cyan-400 px-4 py-2 text-sm font-bold uppercase tracking-wider text-cyan-400 transition-all duration-700 ease-in-out hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 rounded-lg group overflow-hidden"
-        style={{ zIndex: 1 }}
+        onClick={handleClick}
+        className="relative inline-block cursor-pointer border-2 border-cyan-400 px-4 py-2 text-sm font-bold uppercase tracking-wider text-cyan-400 transition-all duration-700 ease-in-out hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 rounded-lg overflow-hidden z-10 pointer-events-auto"
       >
         <span className="relative z-10 block pointer-events-auto">
           {children}
@@ -41,7 +54,7 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
         <div
           className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
           style={{
-            filter: "url(#goo)",
+            filter: isClicked ? "url(#goo)" : "none",
             zIndex: -1,
             bottom: "-3px",
             right: "-1px",
@@ -49,7 +62,11 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
         >
           {/* Blob 1 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0 transform scale-[1.4] translate-y-[125%]"
+            className={`absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out transform ${
+              isClicked
+                ? "scale-[1.3] translate-y-0 opacity-100"
+                : "scale-[0.1] translate-y-[125%] opacity-0"
+            }`}
             style={{
               left: "-5%",
             }}
@@ -57,19 +74,25 @@ const SearchBtn = ({ onClick, children = "Search" }) => {
 
           {/* Blob 2 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0 transform scale-[1.4] translate-y-[125%]"
+            className={`absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out transform ${
+              isClicked
+                ? "scale-[1.3] translate-y-0 opacity-100"
+                : "scale-[0.1] translate-y-[125%] opacity-0"
+            }`}
             style={{
               left: "30%",
-              transitionDelay: "60ms",
             }}
           />
 
           {/* Blob 3 */}
           <div
-            className="absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out group-hover:translate-y-0 transform scale-[1.4] translate-y-[125%]"
+            className={`absolute h-full w-1/3 rounded-full bg-cyan-400 transition-all duration-700 ease-in-out transform ${
+              isClicked
+                ? "scale-[1.3] translate-y-0 opacity-100"
+                : "scale-[0.1] translate-y-[125%] opacity-0"
+            }`}
             style={{
               left: "66%",
-              transitionDelay: "25ms",
             }}
           />
         </div>

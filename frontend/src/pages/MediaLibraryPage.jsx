@@ -4,6 +4,7 @@ import ImageGallery from "../components/common/ImageGallery";
 import LoadingIndicator from "../components/common/LoadingIndicator";
 import AnimatedTitle from "../components/AnimatedTitle";
 import SearchBtn from "../components/SearchBtn";
+import SearchBar from "../components/SearchBar";
 
 const MediaLibraryPage = () => {
   const [query, setQuery] = useState("");
@@ -56,15 +57,13 @@ const MediaLibraryPage = () => {
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <AnimatedTitle text1="NASA Media Library" />
         <form
-          className="flex flex-col md:flex-row gap-4 mb-8 justify-center bg-[#181929]/70 rounded-2xl p-6 border border-[#23244a] shadow-lg transition-all duration-300 group hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]"
+          className="flex flex-col md:flex-row gap-4 mb-8 justify-center bg-[#181929]/70 rounded-2xl p-6 border border-[#23244a] shadow-lg transition-all duration-300 group hover:bg-[#181929]"
           onSubmit={handleSearch}
         >
-          <input
-            type="text"
+          <SearchBar
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for images, videos, or keywords..."
-            className="bg-[#23244a] text-[#F8F9FA] py-2 px-4 rounded border border-[#23244a] focus:outline-none focus:border-[#00D1FF] w-full md:w-96"
+            placeholder="Explore NASA's vast media collection..."
           />
           <SearchBtn onClick={handleSearch} />
         </form>
@@ -98,7 +97,22 @@ const MediaLibraryPage = () => {
           </div>
         ) : (
           <>
-            <ImageGallery images={results} />
+            {results.length === 0 ? (
+              <div className="text-center text-gray-400 py-10 rounded-xl bg-[#181929]/50 border border-[#23244a] shadow-lg">
+                <p className="text-lg font-semibold mb-2">
+                  No media found for your search.
+                </p>
+                <p className="text-sm">
+                  Try searching for anything related to NASA missions, space,
+                  planets, or specific events!
+                </p>
+                <p className="text-sm mt-1">
+                  You can also use the sample prompts above.
+                </p>
+              </div>
+            ) : (
+              <ImageGallery images={results} />
+            )}
             {totalPages > 1 && (
               <div className="flex justify-center mt-6 gap-2">
                 <button
