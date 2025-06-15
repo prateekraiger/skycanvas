@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import "./index.css";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import SpaceBackground from "./components/SpaceBackground";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import APODPage from "./pages/APODPage";
-import MarsRoverPage from "./pages/MarsRoverPage";
-import AsteroidsPage from "./pages/AsteroidsPage";
-import MediaLibraryPage from "./pages/MediaLibraryPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loader";
+
+const LazyHomePage = lazy(() => import("./pages/HomePage"));
+const LazyAPODPage = lazy(() => import("./pages/APODPage"));
+const LazyMarsRoverPage = lazy(() => import("./pages/MarsRoverPage"));
+const LazyAsteroidsPage = lazy(() => import("./pages/AsteroidsPage"));
+const LazyMediaLibraryPage = lazy(() => import("./pages/MediaLibraryPage"));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,13 +41,18 @@ function App() {
             <Navbar />
             <div className="h-16 w-full" aria-hidden="true"></div>
             <div className="flex-grow">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/apod" element={<APODPage />} />
-                <Route path="/mars-rover" element={<MarsRoverPage />} />
-                <Route path="/asteroids" element={<AsteroidsPage />} />
-                <Route path="/media-library" element={<MediaLibraryPage />} />
-              </Routes>
+              <Suspense fallback={<div>Loading Page...</div>}>
+                <Routes>
+                  <Route path="/" element={<LazyHomePage />} />
+                  <Route path="/apod" element={<LazyAPODPage />} />
+                  <Route path="/mars-rover" element={<LazyMarsRoverPage />} />
+                  <Route path="/asteroids" element={<LazyAsteroidsPage />} />
+                  <Route
+                    path="/media-library"
+                    element={<LazyMediaLibraryPage />}
+                  />
+                </Routes>
+              </Suspense>
             </div>
             <Footer />
           </BrowserRouter>
