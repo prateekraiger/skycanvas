@@ -1,91 +1,119 @@
-# SkyCanvas: Your Universe Explorer
+# 🌌 SkyCanvas – Explore the Universe with NASA APIs
 
-![SkyCanvas Screenshot/Demo](path/to/your/screenshot.png)
+![SkyCanvas Screenshot](https://res.cloudinary.com/dk3pg4zly/image/upload/v1749980379/skycanvas_sbthc3.png)
 
-SkyCanvas is a modern, interactive web application designed to bring the wonders of NASA's public data and imagery directly to your browser. It serves as a personal gateway to explore the cosmos, offering a rich collection of features from daily astronomical pictures to detailed Mars Rover missions, and real-time asteroid data.
+**SkyCanvas** is a sleek, interactive web application that brings NASA's open data to life. Whether you're curious about today’s astronomy picture, exploring Mars Rover missions, or monitoring near-Earth asteroids — SkyCanvas makes space exploration accessible and fun.
+
+---
 
 ## ✨ Features
 
-- **Astronomy Picture of the Day (APOD):** Discover a new fascinating image or photograph of our universe daily with detailed explanations.
-- **Mars Rover Gallery:** Dive into thousands of images captured by NASA's Curiosity, Opportunity, Spirit, and Perseverance rovers, with advanced filtering by rover, Martian day (sol), Earth date, and camera.
-- **Asteroids (Near-Earth Objects):** Browse near-Earth asteroids and their close approaches, providing insights into their orbital data.
-- **NASA Media Library Search:** Search and browse NASA's extensive collection of images, videos, and audio.
-- **Responsive & Intuitive UI:** Built with React and Tailwind CSS for a seamless experience across devices.
-- **Robust Backend API Gateway:** Features data fetching, caching, and rate limiting to optimize requests to NASA's APIs.
+- 🔭 **Astronomy Picture of the Day (APOD):** Discover a new image of the cosmos daily with rich descriptions.
+- 🚜 **Mars Rover Explorer:** Browse photos from NASA’s rovers – Curiosity, Perseverance, Spirit, and Opportunity – with filters for Martian day (sol), Earth date, and camera.
+- ☄️ **Asteroid Tracker:** Track near-Earth objects with real-time orbital data and close approach information.
+- 📸 **NASA Media Library:** Search and view NASA’s vast collection of images, videos, and audio.
+- 🧠 **Optimized Backend Gateway:** Smart caching and rate-limiting to efficiently serve data.
+- 💡 **Responsive UI:** Built with Tailwind CSS and optimized for all screen sizes.
+
+---
 
 ## 🚀 Tech Stack
 
-- **Frontend:**
+### Frontend
 
-  - [React](https://reactjs.org/): A JavaScript library for building user interfaces.
-  - [Vite](https://vitejs.dev/): A fast frontend build tool.
-  - [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapid UI development.
+- [React](https://reactjs.org/) – UI development
+- [Vite](https://vitejs.dev/) – Fast dev server and bundler
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS styling
 
-- **Backend:**
+### Backend
 
-  - [Node.js](https://nodejs.org/): A JavaScript runtime built on Chrome's V8 JavaScript engine.
-  - [Express.js](https://expressjs.com/): A fast, unopinionated, minimalist web framework for Node.js.
-  - [Axios](https://axios-http.com/): Promise-based HTTP client for the browser and Node.js.
-  - [Node-Cache](https://www.npmjs.com/package/node-cache): A simple caching module for Node.js.
+- [Node.js](https://nodejs.org/) – JavaScript runtime
+- [Express](https://expressjs.com/) – Web framework for Node.js
+- [Axios](https://axios-http.com/) – HTTP client
+- [Node-Cache](https://www.npmjs.com/package/node-cache) – In-memory caching
 
-- **APIs:**
-  - [NASA Open APIs](https://api.nasa.gov/): The primary data source for all astronomical and planetary data.
+### External APIs
 
-## 📖 Getting Started
+- [NASA Open APIs](https://api.nasa.gov/) – Public API for astronomical data
 
-Follow these steps to get SkyCanvas up and running on your local machine.
+---
 
-### API Key Setup
+## 🛠️ Getting Started
 
-SkyCanvas utilizes NASA's public APIs, which require an API key to function.
+### 1. Get a NASA API Key
 
-1. **Get Your NASA API Key:**
-   Visit [https://api.nasa.gov/](https://api.nasa.gov/) and register for a free API key.
+Sign up at [https://api.nasa.gov/](https://api.nasa.gov/) and obtain a free API key.
 
-2. **Configure Backend API Key:**
+---
 
-   ```
-   NASA_API_KEY=YOUR_PERSONAL_NASA_API_KEY_HERE
-   ```
+### 2. Clone the Repository
 
-### Installation & Running Locally
+```bash
+git clone https://github.com/yourname/skycanvas.git
+cd skycanvas
+```
+````
 
-1. **Clone the repository:**
+---
 
-   ```bash
-   git clone https://github.com/yourname/skycanvas.git
-   cd skycanvas # Navigate into the project directory
-   ```
+### 3. Backend Setup
 
-2. **Install Backend Dependencies & Start Server:**
+```bash
+cd backend
+npm install
+```
 
-   ```bash
-   cd backend
-   npm install
-   npm run dev # Starts the backend in development mode (with nodemon)
-   # The backend will typically run on http://localhost:5000
-   ```
+Create a `.env` file in the `backend` folder and add:
 
-3. **Install Frontend Dependencies & Start Dev Server:**
-   In a **new terminal window/tab**, navigate to the `frontend` directory:
+```
+NASA_API_KEY=YOUR_PERSONAL_NASA_API_KEY
+```
 
-   ```bash
-   cd ../frontend
-   npm install
-   npm run dev
-   # The frontend will typically run on http://localhost:5173
-   ```
+Start the backend server:
 
-4. **Open in Browser:**
-   Once both the backend and frontend servers are running, open your web browser and visit: `http://localhost:5173` (or the URL displayed in your frontend terminal).
+```bash
+npm run dev
+# Runs on http://localhost:5000
+```
 
-## ⚙️ Configuration
+---
 
-Environment variables are used to manage sensitive information and configuration settings.
+### 4. Frontend Setup
 
-- **`backend/.env`:**
+Open a new terminal:
 
-  - `NASA_API_KEY`: Your personal NASA API key.
+```bash
+cd frontend
+npm install
+```
 
-- **`frontend/.env`:**
-  - `VITE_API_BASE_URL`: The URL of your backend API (e.g., `http://localhost:5000/api/nasa`).
+Create a `.env` file in the `frontend` folder and add:
+
+```
+VITE_API_BASE_URL=http://localhost:5000/api/nasa
+```
+
+Start the frontend dev server:
+
+```bash
+npm run dev
+# Runs on http://localhost:5173
+```
+
+---
+
+### 5. View in Browser
+
+Open:
+**[http://localhost:5173](http://localhost:5173)**
+
+---
+
+## ⚙️ Environment Variables
+
+| File            | Variable            | Description          |
+| --------------- | ------------------- | -------------------- |
+| `backend/.env`  | `NASA_API_KEY`      | Your NASA API key    |
+| `frontend/.env` | `VITE_API_BASE_URL` | Backend endpoint URL |
+
+---
