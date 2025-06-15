@@ -1,4 +1,4 @@
-# 🌌 SkyCanvas – Explore the Universe with NASA APIs
+# SkyCanvas – Explore the Universe with NASA APIs
 
 ![SkyCanvas Screenshot](https://res.cloudinary.com/dk3pg4zly/image/upload/v1749980379/skycanvas_sbthc3.png)
 
