@@ -32,7 +32,14 @@ const features = [
 
 const About = () => {
   return (
-    <section className="relative mt-10 lg:mt-20 mb-10 pt-0">
+    <section
+      id="about"
+      className="relative mt-10 lg:mt-20 mb-10 pt-0"
+    >
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-cyan-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow delay-2000"></div>
+      </div>
       <div className="relative p-0 md:p-0 rounded-3xl shadow-none border-none overflow-visible bg-transparent">
         <div className="relative z-10 flex flex-col lg:flex-row-reverse gap-16 items-center">
           {/* Content section */}
@@ -60,7 +67,8 @@ const About = () => {
                 <Link
                   key={index}
                   to={feature.to}
-                  className="group relative bg-gray-900/70 backdrop-blur-sm rounded-xl px-6 py-3 hover:bg-cyan-900/50 transition-all duration-300 border border-gray-700 hover:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 hover:shadow-[0_10px_30px_rgba(0,209,255,0.4)] hover:-translate-y-1 transform"
+                  className="group relative bg-gray-900/70 backdrop-blur-sm rounded-xl px-6 py-3 hover:bg-cyan-900/50 transition-all duration-300 border border-gray-700 hover:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 hover:shadow-[0_10px_30px_rgba(0,209,255,0.4)] hover:-translate-y-1 transform animate-fade-in-up"
+                  style={{ animationDelay: `${index * 150}ms` }}
                 >
                   <div className="text-3xl mb-3 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-2 text-gray-300 group-hover:text-cyan-300">
                     {feature.icon}
