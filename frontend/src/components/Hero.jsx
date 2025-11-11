@@ -9,9 +9,9 @@ function Hero() {
     <section className="relative w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16 pt-4 pb-4 lg:pt-16 lg:pb-16 transition-all duration-700 min-h-fit lg:min-h-[80vh] overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-cyan-500/5 to-blue-600/10"></div>
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-cyan-500/5 to-blue-600/10 animate-gradient-move"></div>
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow delay-2000"></div>
       </div>
 
       {/* Left Side - Text Content */}
@@ -21,7 +21,9 @@ function Hero() {
           {/* Primary heading */}
           <div className="relative">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-none tracking-tight">
-              <span className="text-white block mb-2">Discover the</span>
+              <span className="text-white block mb-2 animate-text-reveal">
+                Discover the
+              </span>
               <span className="relative inline-block">
                 {/* Main text with gradient with WordRotate */}
                 <WordRotate
@@ -38,7 +40,7 @@ function Hero() {
 
           {/* Brand subtitle */}
           <div className="relative">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/90 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/90 leading-tight animate-text-reveal delay-500">
               with <span className="text-cyan-400">SkyCanvas</span>
             </h2>
           </div>
@@ -46,14 +48,14 @@ function Hero() {
 
         {/* Mission statement */}
         <div className="relative space-y-6">
-          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-300 leading-relaxed font-light tracking-wide">
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-300 leading-relaxed font-light tracking-wide animate-text-reveal delay-1000">
             Your gateway to the cosmos through{" "}
             <span className="text-cyan-400 font-medium">
               NASA's powerful APIs
             </span>
           </p>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-400 leading-relaxed max-w-2xl">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-400 leading-relaxed max-w-2xl animate-text-reveal delay-1500">
             Journey through space with stunning astronomical photography,
             real-time satellite data, Mars rover discoveries, and interactive
             visualizations that bring the universe to your fingertips.

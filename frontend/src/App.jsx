@@ -12,6 +12,7 @@ const LazyAPODPage = lazy(() => import("./pages/APODPage"));
 const LazyMarsRoverPage = lazy(() => import("./pages/MarsRoverPage"));
 const LazyAsteroidsPage = lazy(() => import("./pages/AsteroidsPage"));
 const LazyMediaLibraryPage = lazy(() => import("./pages/MediaLibraryPage"));
+const LazyEPICPage = lazy(() => import("./pages/EPICPage"));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -51,6 +52,7 @@ function App() {
                     path="/media-library"
                     element={<LazyMediaLibraryPage />}
                   />
+                  <Route path="/epic" element={<LazyEPICPage />} />
                 </Routes>
               </Suspense>
             </div>

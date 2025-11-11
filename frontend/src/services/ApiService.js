@@ -91,6 +91,14 @@ class ApiService {
     )}&end_date=${encodeURIComponent(endDate)}`;
     return this.fetchAPI(endpoint);
   }
+
+  /**
+   * Get EPIC images
+   * @param {string} date - Date in YYYY-MM-DD format
+   */
+  async getEPIC(date) {
+    return this.fetchAPI(`/epic/date/${date}`);
+  }
 }
 
 // Create a singleton instance
