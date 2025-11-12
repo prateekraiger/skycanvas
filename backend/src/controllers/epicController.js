@@ -1,26 +1,187 @@
-const express = require("express");
-const router = express.Router();
-const {
-  getNaturalImages,
-  getNaturalImagesByDate,
-  getEnhancedImages,
-  getEnhancedImagesByDate,
-  getAvailableDates,
-} = require("../controllers/epicController");
+// src/controllers/epicController.js
+const axios = require("axios");
+const { formatResponse } = require("../utils/responseFormatter");
+const { NASA_API_BASE_URL, NASA_API_KEY } = require("../config/apiConfig");
+const { getCache, setCache } = require("../utils/cache");
 
-// Get latest natural color images
-router.get("/natural", getNaturalImages);
+/**
+ * Controller for the EPIC (Earth Polychromatic Imaging Camera) endpoints
+ */
+const epicController = {
+  /**
+   * Get latest natural color EPIC images
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @param {Function} next - Express next middleware function
+   */
+  getNaturalImages: async (req, res, next) => {
+    try {
+      const cacheKey = "epic:natural:latest";
+      const cached = getCache(cacheKey);
+      if (cached) return formatResponse(res, 200, cached);
 
-// Get natural color images by specific date
-router.get("/natural/date/:date", getNaturalImagesByDate);
+      const response = await axios.get(
+        `${NASA_API_BASE_URL}/EPIC/api/natural`,
+        {
+          params: {
+            api_key: NASA_API_KEY,
+          },
+        }
+      );
 
-// Get latest enhanced color images
-router.get("/enhanced", getEnhancedImages);
+      setCache(cacheKey, response.data, "EPIC");
+      return formatResponse(res, 200, response.data);
+    } catch (error) {
+      next(error);
+    }
+  },
 
-// Get enhanced color images by specific date
-router.get("/enhanced/date/:date", getEnhancedImagesByDate);
+  /**
+   * Get natural color EPIC images by date
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @param {Function} next - Express next middleware function
+   */
+  getNaturalImagesByDate: async (req, res, next) => {
+    try {
+      const { date } = req.params;
+      const cacheKey = `epic:natural:date:${date}`;
+      const cached = getCache(cacheKey);
+      if (cached) return formatResponse(res, 200, cached);
 
-// Get all available dates with EPIC images
-router.get("/dates", getAvailableDates);
+      // Validate date format (YYYY-MM-DD)
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateRegex.test(date)) {
+        return formatResponse(
+          res,
+          400,
+          null,
+          "Invalid date format. Use YYYY-MM-DD"
+        );
+      }
 
-module.exports = router;
+      const response = await axios.get(
+        `${NASA_API_BASE_URL}/EPIC/api/natural/date/${date}`,
+        {
+          params: {
+            api_key: NASA_API_KEY,
+          },
+        }
+      );
+
+      setCache(cacheKey, response.data, "EPIC");
+      return formatResponse(res, 200, response.data);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * Get latest enhanced color EPIC images
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @param {Function} next - Express next middleware function
+   */
+  getEnhancedImages: async (req, res, next) => {
+    try {
+      const cacheKey = "epic:enhanced:latest";
+      const cached = getCache(cacheKey);
+      if (cached) return formatResponse(res, 200, cached);
+
+      const response = await axios.get(
+        `${NASA_API_BASE_URL}/EPIC/api/enhanced`,
+        {
+          params: {
+            api_key: NASA_API_KEY,
+          },
+        }
+      );
+
+      setCache(cacheKey, response.data, "EPIC");
+      return formatResponse(res, 200, response.data);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * Get enhanced color EPIC images by date
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @param {Function} next - Express next middleware function
+   */
+  getEnhancedImagesByDate: async (req, res, next) => {
+    try {
+      const { date } = req.params;
+      const cacheKey = `epic:enhanced:date:${date}`;
+      const cached = getCache(cacheKey);
+      if (cached) return formatResponse(res, 200, cached);
+
+      // Validate date format (YYYY-MM-DD)
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateRegex.test(date)) {
+        return formatResponse(
+          res,
+          400,
+          null,
+          "Invalid date format. Use YYYY-MM-DD"
+        );
+      }
+
+      const response = await axios.get(
+        `${NASA_API_BASE_URL}/EPIC/api/enhanced/date/${date}`,
+        {
+          params: {
+            api_key: NASA_API_KEY,
+          },
+        }
+      );
+
+      setCache(cacheKey, response.data, "EPIC");
+      return formatResponse(res, 200, response.data);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  /**
+   * Get all available dates with EPIC images
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   * @param {Function} next - Express next middleware function
+   */
+  getAvailableDates: async (req, res, next) => {
+    try {
+      const { type = "natural" } = req.query;
+      const cacheKey = `epic:dates:${type}`;
+      const cached = getCache(cacheKey);
+      if (cached) return formatResponse(res, 200, cached);
+
+      // Validate type
+      if (!["natural", "enhanced"].includes(type)) {
+        return formatResponse(
+          res,
+          400,
+          null,
+          "Invalid type. Use 'natural' or 'enhanced'"
+        );
+      }
+
+      const response = await axios.get(
+        `${NASA_API_BASE_URL}/EPIC/api/${type}/all`,
+        {
+          params: {
+            api_key: NASA_API_KEY,
+          },
+        }
+      );
+
+      setCache(cacheKey, response.data, "EPIC");
+      return formatResponse(res, 200, response.data);
+    } catch (error) {
+      next(error);
+    }
+  },
+};
+
+module.exports = epicController;
