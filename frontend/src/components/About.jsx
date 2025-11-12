@@ -28,14 +28,17 @@ const features = [
     desc: "Browse NASA's vast collection of images, videos, and audio.",
     to: "/media-library",
   },
+  {
+    icon: "🌍",
+    title: "EPIC",
+    desc: "View daily images of Earth from the EPIC camera.",
+    to: "/epic",
+  },
 ];
 
 const About = () => {
   return (
-    <section
-      id="about"
-      className="relative mt-10 lg:mt-20 mb-10 pt-0"
-    >
+    <section id="about" className="relative mt-10 lg:mt-20 mb-10 pt-0">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-cyan-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
         <div className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow delay-2000"></div>

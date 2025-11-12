@@ -1,98 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer utilities {
-  .bg-royalblue {
-    background-color: royalblue;
-  }
-  @keyframes gradient-move {
-    0% {
-      background-position: 0% 50%;
+    .bg-royalblue {
+        background-color: royalblue;
     }
-    50% {
-      background-position: 100% 50%;
+    @keyframes gradient-move {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
-    100% {
-      background-position: 0% 50%;
+    .animate-gradient-move {
+        background-size: 200% 200%;
+        animation: gradient-move 15s ease infinite;
     }
-  }
-  .animate-gradient-move {
-    background-size: 200% 200%;
-    animation: gradient-move 15s ease infinite;
-  }
-  @keyframes pulse-slow {
-    0%,
-    100% {
-      opacity: 0.5;
-      transform: scale(1);
+    @keyframes pulse-slow {
+        0%,
+        100% {
+            opacity: 0.5;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
     }
-    50% {
-      opacity: 1;
-      transform: scale(1.05);
+    .animate-pulse-slow {
+        animation: pulse-slow 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
-  }
-  .animate-pulse-slow {
-    animation: pulse-slow 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  @keyframes text-reveal {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+    @keyframes text-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    .animate-text-reveal {
+        animation: text-reveal 1s ease-out forwards;
     }
-  }
-  .animate-text-reveal {
-    animation: text-reveal 1s ease-out forwards;
-  }
 }
 
-
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  background: transparent;
+    width: 8px;
+    height: 8px;
+    background: transparent;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(24, 25, 41, 0.2);
-  border-radius: 8px;
+    background: rgba(24, 25, 41, 0.2);
+    border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #00d1ff 0%, #8a2be2 100%);
-  border-radius: 8px;
-  min-height: 40px;
-  transition: background 0.3s;
+    background: linear-gradient(135deg, #00d1ff 0%, #8a2be2 100%);
+    border-radius: 8px;
+    min-height: 40px;
+    transition: background 0.3s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #00ffc6 0%, #8a2be2 100%);
+    background: linear-gradient(135deg, #00ffc6 0%, #8a2be2 100%);
 }
 
 ::-webkit-scrollbar-corner {
-  background: transparent;
+    background: transparent;
 }
 
 html {
-  scroll-behavior: smooth;
-  background-color: #000000;
-  overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-color: #000000;
+    overflow-x: hidden;
 }
 
 body {
-  font-family: 'Lexend', sans-serif;
-  color: #F8F9FA;
-  background: transparent;
-  letter-spacing: 0.01em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "Lexend", sans-serif;
+    color: #f8f9fa;
+    background: transparent;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -102,9 +101,9 @@ h4,
 h5,
 h6,
 .heading {
-  font-family: 'Anta', serif;
-  font-weight: 900;
-  letter-spacing: 0.01em;
+    font-family: "Anta", serif;
+    font-weight: 900;
+    letter-spacing: 0.01em;
 }
 
 p,
@@ -112,34 +111,33 @@ span,
 .description,
 .desc,
 .text-body {
-  font-family: 'Lexend', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.01em;
+    font-family: "Lexend", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 /* Firefox scrollbar */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #00d1ff #181929;
+    scrollbar-width: thin;
+    scrollbar-color: #00d1ff #181929;
 }
 
 /* Text selection highlight */
 ::selection {
-  background: #00d1ff44;
-  color: #F8F9FA;
+    background: #00d1ff44;
+    color: #f8f9fa;
 }
 
 /* Link hover effect */
 a {
-  color: #00d1ff;
-  transition: color 0.2s;
-  text-decoration: none;
+    color: #00d1ff;
+    transition: color 0.2s;
+    text-decoration: none;
 }
-
 
 /* Focus ring for accessibility */
 :focus-visible {
-  outline: 2px solid #00d1ff;
-  outline-offset: 2px;
-  transition: outline 0.2s;
+    outline: 2px solid #00d1ff;
+    outline-offset: 2px;
+    transition: outline 0.2s;
 }
