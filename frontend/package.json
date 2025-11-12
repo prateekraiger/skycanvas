@@ -17,6 +17,7 @@
     "@types/prop-types": "^15.7.14",
     "chart.js": "^4.5.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.23.24",
     "motion": "^12.18.1",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
