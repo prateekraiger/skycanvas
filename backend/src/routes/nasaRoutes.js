@@ -6,7 +6,6 @@ const router = express.Router();
 const apodController = require("../controllers/apodController");
 const mediaLibraryController = require("../controllers/mediaLibraryController");
 const asteroidsController = require("../controllers/asteroidsController");
-const epicController = require("../controllers/epicController");
 
 // Import rate limiters
 const { endpointLimiter } = require("../middlewares/rateLimiter");
@@ -44,33 +43,6 @@ router.get(
   "/asteroids/feed",
   endpointLimiter,
   asteroidsController.getAsteroidsFeed,
-);
-
-// EPIC (Earth Polychromatic Imaging Camera) routes
-router.get(
-  "/epic/natural",
-  endpointLimiter,
-  epicController.getNaturalImages
-);
-router.get(
-  "/epic/natural/date/:date",
-  endpointLimiter,
-  epicController.getNaturalImagesByDate
-);
-router.get(
-  "/epic/enhanced",
-  endpointLimiter,
-  epicController.getEnhancedImages
-);
-router.get(
-  "/epic/enhanced/date/:date",
-  endpointLimiter,
-  epicController.getEnhancedImagesByDate
-);
-router.get(
-  "/epic/dates",
-  endpointLimiter,
-  epicController.getAvailableDates
 );
 
 module.exports = router;
