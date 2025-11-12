@@ -97,7 +97,7 @@ class ApiService {
    * @param {string} date - Date in YYYY-MM-DD format
    */
   async getEPIC(date) {
-    return this.fetchAPI(`/epic/date/${date}`);
+    return this.fetchAPI(`/epic/natural/date/${date}`);
   }
 }
 
