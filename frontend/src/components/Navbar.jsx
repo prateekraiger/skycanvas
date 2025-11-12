@@ -9,6 +9,7 @@ const navItems = [
   { name: "APOD", path: "/apod" },
   { name: "Asteroids", path: "/asteroids" },
   { name: "Media Library", path: "/media-library" },
+  { name: "GIBS", path: "/gibs" },
 ];
 
 const Navbar = () => {

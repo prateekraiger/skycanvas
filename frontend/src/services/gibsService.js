@@ -7,23 +7,7 @@ export const gibsService = {
     return response.json();
   },
 
-  async getImagery(
-    date,
-    layer = "VIIRS_SNPP_CorrectedReflectance_TrueColor",
-    options = {},
-  ) {
-    const params = new URLSearchParams({
-      date,
-      layer,
-      width: options.width || 1024,
-      height: options.height || 1024,
-      ...(options.bbox && { bbox: options.bbox }),
-    });
-
-    return `${API_BASE_URL}/gibs/imagery?${params}`;
-  },
-
-  async getMap(layers, bbox, time, options = {}) {
+  async getMapUrl(layers, bbox, time, options = {}) {
     const params = new URLSearchParams({
       layers,
       bbox,

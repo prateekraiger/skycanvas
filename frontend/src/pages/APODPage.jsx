@@ -68,7 +68,7 @@ const APODPage = () => {
         setIsLoading(true);
         const formattedDate = formatDateToYYYYMMDD(dateToFetch);
         const response = await apiService.getAPOD(formattedDate);
-        setApodData(response.data);
+        setApodData(response);
         setError(null);
       } catch (err) {
         // If it's a 404 (Not Found) error, show specific message

@@ -20,29 +20,29 @@ router.get("/apod/range", endpointLimiter, apodController.getApodDateRange);
 router.get(
   "/media/search",
   endpointLimiter,
-  mediaLibraryController.searchMedia
+  mediaLibraryController.searchMedia,
 );
 router.get(
   "/media/asset/:nasaId",
   endpointLimiter,
-  mediaLibraryController.getAssetMetadata
+  mediaLibraryController.getAssetMetadata,
 );
 router.get(
   "/media/popular",
   endpointLimiter,
-  mediaLibraryController.getPopularMedia
+  mediaLibraryController.getPopularMedia,
 );
 router.get(
   "/media/collections",
   endpointLimiter,
-  mediaLibraryController.getCollections
+  mediaLibraryController.getCollections,
 );
 
 // Asteroids (NeoWs) routes
 router.get(
   "/asteroids/feed",
   endpointLimiter,
-  asteroidsController.getAsteroidsFeed
+  asteroidsController.getAsteroidsFeed,
 );
 
 module.exports = router;
