@@ -8,15 +8,6 @@
 
 ## ✨ Features
 
-- 🔭 **Astronomy Picture of the Day (APOD):** Discover a new image of the cosmos daily with rich descriptions.
-- 🚜 **Mars Rover Explorer:** Browse photos from NASA's rovers – Curiosity, Perseverance, Spirit, and Opportunity – with filters for Martian day (sol), Earth date, and camera.
-- ☄️ **Asteroid Tracker:** Track near-Earth objects with real-time orbital data and close approach information.
-- 📸 **NASA Media Library:** Search and view NASA's vast collection of images, videos, and audio.
-- 🧠 **Optimized Backend Gateway:** Smart caching and rate-limiting to efficiently serve data.
-- 💡 **Responsive UI:** Built with Tailwind CSS and optimized for all screen sizes.
-
----
-
 ## 🚀 Tech Stack
 
 ### Frontend
