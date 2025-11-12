@@ -6,8 +6,6 @@ const router = express.Router();
 const apodController = require("../controllers/apodController");
 const mediaLibraryController = require("../controllers/mediaLibraryController");
 const asteroidsController = require("../controllers/asteroidsController");
-const nasaController = require("../controllers/nasaController");
-const epicRoutes = require("./epicRoutes");
 
 // Import rate limiters
 const { endpointLimiter } = require("../middlewares/rateLimiter");
@@ -17,9 +15,6 @@ router.get("/apod", endpointLimiter, apodController.getApod);
 router.get("/apod/random", endpointLimiter, apodController.getRandomApod);
 router.get("/apod/date/:date", endpointLimiter, apodController.getApodByDate);
 router.get("/apod/range", endpointLimiter, apodController.getApodDateRange);
-
-// EPIC routes (nested under /epic)
-router.use("/epic", epicRoutes);
 
 // NASA Image and Video Library routes
 router.get(

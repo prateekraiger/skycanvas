@@ -6,7 +6,6 @@ const NodeCache = require("node-cache");
 
 // Import routes
 const nasaRoutes = require("./src/routes/nasaRoutes");
-const gibsRoutes = require("./src/routes/gibsRoutes"); // if you have it
 
 // Import middlewares
 const { serverLimiter } = require("./src/middlewares/rateLimiter");
@@ -33,7 +32,6 @@ app.use(serverLimiter);
 
 // Routes
 app.use("/api/nasa", nasaRoutes);
-app.use("/api/gibs", gibsRoutes); // if you have it
 
 // Home route
 app.get("/", (req, res) => {
@@ -92,7 +90,6 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
   console.log(`📡 NASA API endpoints: http://localhost:${PORT}/api/nasa`);
-  console.log(`🛰️  GIBS API endpoints: http://localhost:${PORT}/api/gibs`);
   console.log(`💚 Health check: http://localhost:${PORT}/health`);
 });
 
