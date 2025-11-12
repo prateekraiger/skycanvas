@@ -42,34 +42,6 @@ class ApiService {
   }
 
   /**
-   * Get Mars Rover photos
-   * @param {string} rover - Rover name (curiosity, opportunity, spirit, perseverance)
-   * @param {object} params - Filter parameters (sol, camera, earth_date, etc.)
-   */
-  async getMarsRoverPhotos(rover = "curiosity", params = {}) {
-    // Backend: /mars-rover/:rover?sol=...&camera=...&earth_date=...
-    let queryString = Object.keys(params)
-      .filter((key) => params[key] !== null && params[key] !== undefined)
-      .map((key) => `${key}=${encodeURIComponent(params[key])}`)
-      .join("&");
-    queryString = queryString ? `?${queryString}` : "";
-    return this.fetchAPI(`/mars-rover/${rover}${queryString}`);
-  }
-
-  /**
-   * Get available Mars Rovers (not directly available in backend, so stub or remove if not needed)
-   */
-  async getAvailableRovers() {
-    // Not implemented in backend, return static list
-    return [
-      { name: "curiosity" },
-      { name: "opportunity" },
-      { name: "spirit" },
-      { name: "perseverance" },
-    ];
-  }
-
-  /**
    * Search NASA Media Library
    * @param {string} query - Search query
    * @param {number} page - Page number

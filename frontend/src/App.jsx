@@ -9,7 +9,6 @@ import Loader from "./components/Loader";
 
 const LazyHomePage = lazy(() => import("./pages/HomePage"));
 const LazyAPODPage = lazy(() => import("./pages/APODPage"));
-const LazyMarsRoverPage = lazy(() => import("./pages/MarsRoverPage"));
 const LazyAsteroidsPage = lazy(() => import("./pages/AsteroidsPage"));
 const LazyMediaLibraryPage = lazy(() => import("./pages/MediaLibraryPage"));
 
@@ -45,7 +44,6 @@ function App() {
                 <Routes>
                   <Route path="/" element={<LazyHomePage />} />
                   <Route path="/apod" element={<LazyAPODPage />} />
-                  <Route path="/mars-rover" element={<LazyMarsRoverPage />} />
                   <Route path="/asteroids" element={<LazyAsteroidsPage />} />
                   <Route
                     path="/media-library"
