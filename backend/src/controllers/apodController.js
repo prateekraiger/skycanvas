@@ -71,8 +71,7 @@ const apodController = {
   getApodByDate: async (req, res, next) => {
     try {
       const { date } = req.params;
-      const { hd, thumbs } = req.query;
-      const cacheKey = `apod:date:${date}:${hd}:${thumbs}`;
+      const cacheKey = `apod:date:${date}`;
       const cached = getCache(cacheKey);
       if (cached) return formatResponse(res, 200, cached);
       // Validate date format (YYYY-MM-DD)
@@ -89,8 +88,6 @@ const apodController = {
         params: {
           api_key: NASA_API_KEY,
           date,
-          hd: hd === "true",
-          thumbs: thumbs === "true",
         },
       });
       setCache(cacheKey, response.data, "APOD");

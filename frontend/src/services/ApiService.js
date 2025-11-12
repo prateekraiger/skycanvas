@@ -48,7 +48,7 @@ class ApiService {
    */
   async searchMediaLibrary(query, page = 1) {
     return this.fetchAPI(
-      `/media/search?q=${encodeURIComponent(query)}&page=${page}`
+      `/media/search?q=${encodeURIComponent(query)}&page=${page}`,
     );
   }
 
@@ -59,10 +59,11 @@ class ApiService {
    */
   async getAsteroidsFeed(startDate, endDate) {
     let endpoint = `/asteroids/feed?start_date=${encodeURIComponent(
-      startDate
+      startDate,
     )}&end_date=${encodeURIComponent(endDate)}`;
     return this.fetchAPI(endpoint);
   }
+
 }
 
 // Create a singleton instance

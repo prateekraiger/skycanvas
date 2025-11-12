@@ -11,7 +11,6 @@ const LazyHomePage = lazy(() => import("./pages/HomePage"));
 const LazyAPODPage = lazy(() => import("./pages/APODPage"));
 const LazyAsteroidsPage = lazy(() => import("./pages/AsteroidsPage"));
 const LazyMediaLibraryPage = lazy(() => import("./pages/MediaLibraryPage"));
-const LazyGIBSPage = lazy(() => import("./pages/GIBSPage"));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +49,6 @@ function App() {
                     path="/media-library"
                     element={<LazyMediaLibraryPage />}
                   />
-                  <Route path="/gibs" element={<LazyGIBSPage />} />
                 </Routes>
               </Suspense>
             </div>
