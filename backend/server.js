@@ -6,6 +6,7 @@ const NodeCache = require("node-cache");
 
 // Import routes
 const nasaRoutes = require("./src/routes/nasaRoutes");
+const eonetRoutes = require("./src/routes/eonetRoutes");
 
 // Import middlewares
 const { serverLimiter } = require("./src/middlewares/rateLimiter");
@@ -32,6 +33,7 @@ app.use(serverLimiter);
 
 // Routes
 app.use("/api/nasa", nasaRoutes);
+app.use("/api/eonet", eonetRoutes);
 
 // Home route
 app.get("/", (req, res) => {
@@ -46,6 +48,14 @@ app.get("/", (req, res) => {
         epicByDate: "/api/nasa/epic/natural/date/:date",
         epicEnhanced: "/api/nasa/epic/enhanced",
         epicDates: "/api/nasa/epic/dates",
+      },
+      eonet: {
+        events: "/api/eonet/events",
+        eventsGeoJSON: "/api/eonet/events/geojson",
+        categories: "/api/eonet/categories",
+        categoryById: "/api/eonet/categories/:id",
+        layers: "/api/eonet/layers",
+        sources: "/api/eonet/sources",
       },
       gibs: {
         products: "/api/gibs/products",
@@ -90,6 +100,7 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
   console.log(`📡 NASA API endpoints: http://localhost:${PORT}/api/nasa`);
+  console.log(`🌊 EONET API endpoints: http://localhost:${PORT}/api/eonet`);
   console.log(`💚 Health check: http://localhost:${PORT}/health`);
 });
 
