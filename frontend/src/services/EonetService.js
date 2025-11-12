@@ -1,5 +1,5 @@
 // EonetService.js - Handles all EONET API calls
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+const EONET_API_BASE_URL = "https://eonet.gsfc.nasa.gov/api/v3";
 
 class EonetService {
   /**
@@ -10,7 +10,7 @@ class EonetService {
   static async getEvents(params = {}) {
     try {
       const queryString = new URLSearchParams(params).toString();
-      const url = `${API_BASE_URL}/eonet/events${queryString ? `?${queryString}` : ""}`;
+      const url = `${EONET_API_BASE_URL}/events${queryString ? `?${queryString}` : ""}`;
 
       const response = await fetch(url);
 
@@ -34,7 +34,7 @@ class EonetService {
   static async getEventsGeoJSON(params = {}) {
     try {
       const queryString = new URLSearchParams(params).toString();
-      const url = `${API_BASE_URL}/eonet/events/geojson${queryString ? `?${queryString}` : ""}`;
+      const url = `${EONET_API_BASE_URL}/events/geojson${queryString ? `?${queryString}` : ""}`;
 
       const response = await fetch(url);
 
@@ -56,7 +56,7 @@ class EonetService {
    */
   static async getCategories() {
     try {
-      const response = await fetch(`${API_BASE_URL}/eonet/categories`);
+      const response = await fetch(`${EONET_API_BASE_URL}/categories`);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -79,7 +79,7 @@ class EonetService {
   static async getCategoryById(categoryId, params = {}) {
     try {
       const queryString = new URLSearchParams(params).toString();
-      const url = `${API_BASE_URL}/eonet/categories/${categoryId}${queryString ? `?${queryString}` : ""}`;
+      const url = `${EONET_API_BASE_URL}/categories/${categoryId}${queryString ? `?${queryString}` : ""}`;
 
       const response = await fetch(url);
 
@@ -101,7 +101,7 @@ class EonetService {
    */
   static async getLayers() {
     try {
-      const response = await fetch(`${API_BASE_URL}/eonet/layers`);
+      const response = await fetch(`${EONET_API_BASE_URL}/layers`);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -121,7 +121,7 @@ class EonetService {
    */
   static async getSources() {
     try {
-      const response = await fetch(`${API_BASE_URL}/eonet/sources`);
+      const response = await fetch(`${EONET_API_BASE_URL}/sources`);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

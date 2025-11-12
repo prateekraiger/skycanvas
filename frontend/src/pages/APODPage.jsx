@@ -118,11 +118,11 @@ const APODPage = () => {
 
   return (
     <div className="min-h-screen ">
-      <div className="px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <AnimatedTitle text1="Astronomy Picture of the Day" />
 
         {/* Date selector */}
-        <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-2">
           <button
             onClick={handlePreviousDay}
             className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors"
@@ -153,6 +153,9 @@ const APODPage = () => {
             <i className="fas fa-chevron-right ml-2"></i>
           </button>
         </div>
+        <p className="text-center text-gray-400 text-sm mb-8">
+          Note: Future dates cannot be selected.
+        </p>
 
         {/* APOD Content */}
         <div className="bg-[linear-gradient(to_top_right,_rgb(7,16,45),_rgb(58,60,84))] rounded-2xl shadow-lg overflow-hidden border border-[#23244a] transition-all duration-300 group hover:border-cyan-400 hover:shadow-[0_0_32px_#00d1ff55]">

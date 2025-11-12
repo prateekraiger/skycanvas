@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loader";
+import EventsDashboard from "./pages/EventsDashboard";
+import WildfiresView from "./pages/WildfiresView";
 
 const LazyHomePage = lazy(() => import("./pages/HomePage"));
 const LazyAPODPage = lazy(() => import("./pages/APODPage"));
@@ -19,7 +21,7 @@ function App() {
     // Simulate loading resources
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -44,12 +46,13 @@ function App() {
                 <Routes>
                   <Route path="/" element={<LazyHomePage />} />
                   <Route path="/apod" element={<LazyAPODPage />} />
-
                   <Route path="/asteroids" element={<LazyAsteroidsPage />} />
                   <Route
                     path="/media-library"
                     element={<LazyMediaLibraryPage />}
                   />
+                  <Route path="/events" element={<EventsDashboard />} />
+                  <Route path="/wildfires" element={<WildfiresView />} />
                 </Routes>
               </Suspense>
             </div>
