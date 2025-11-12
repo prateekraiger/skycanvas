@@ -4,35 +4,36 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const NodeCache = require("node-cache");
 
+// Import routes
 const nasaRoutes = require("./src/routes/nasaRoutes");
+const gibsRoutes = require("./src/routes/gibsRoutes"); // if you have it
+
+// Import middlewares
 const { serverLimiter } = require("./src/middlewares/rateLimiter");
 const { handleError } = require("./src/utils/errorHandler");
 
 // Create Express app
 const app = express();
 
-// Initialize cache (1 hour TTL)
+// Initialize cache
 const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
-
-// Make cache available to routes
 app.locals.cache = cache;
 
 // Define port
 const PORT = process.env.PORT || 5000;
 
 // Middlewares
-app.use(helmet()); // Security headers
-app.use(cors({
-  origin: 'http://localhost:5173'
-})); // Enable CORS
-app.use(express.json()); // Parse JSON bodies
-app.use(morgan("dev")); // Logging
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
 
-// Apply rate limiting to all requests
+// Apply rate limiting
 app.use(serverLimiter);
 
 // Routes
 app.use("/api/nasa", nasaRoutes);
+app.use("/api/gibs", gibsRoutes); // if you have it
 
 // Home route
 app.get("/", (req, res) => {
@@ -42,15 +43,22 @@ app.get("/", (req, res) => {
     endpoints: {
       nasa: {
         apod: "/api/nasa/apod",
-        marsRover: "/api/nasa/mars-rover",
-        epic: "/api/nasa/epic",
-        mediaLibrary: "/api/nasa/media",
+        apodByDate: "/api/nasa/apod/date/:date",
+        epicNatural: "/api/nasa/epic/natural",
+        epicByDate: "/api/nasa/epic/natural/date/:date",
+        epicEnhanced: "/api/nasa/epic/enhanced",
+        epicDates: "/api/nasa/epic/dates",
+      },
+      gibs: {
+        products: "/api/gibs/products",
+        imagery: "/api/gibs/imagery",
+        map: "/api/gibs/map",
       },
     },
   });
 });
 
-// Health check endpoint
+// Health check
 app.get("/health", (req, res) => {
   const cacheStats = cache.getStats();
   res.json({
@@ -61,7 +69,6 @@ app.get("/health", (req, res) => {
       keys: cache.keys().length,
       hits: cacheStats.hits,
       misses: cacheStats.misses,
-      hitRate: cacheStats.hits / (cacheStats.hits + cacheStats.misses) || 0,
     },
   });
 });
@@ -83,6 +90,9 @@ app.use((err, req, res, next) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`📡 NASA API endpoints: http://localhost:${PORT}/api/nasa`);
+  console.log(`🛰️  GIBS API endpoints: http://localhost:${PORT}/api/gibs`);
   console.log(`💚 Health check: http://localhost:${PORT}/health`);
 });
 
