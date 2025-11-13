@@ -7,6 +7,7 @@ const NodeCache = require("node-cache");
 // Import routes
 const nasaRoutes = require("./src/routes/nasaRoutes");
 const eonetRoutes = require("./src/routes/eonetRoutes");
+const epicRoutes = require("./src/routes/epicRoutes");
 
 // Import middlewares
 const { serverLimiter } = require("./src/middlewares/rateLimiter");
@@ -33,6 +34,7 @@ app.use(serverLimiter);
 
 // Routes
 app.use("/api/nasa", nasaRoutes);
+app.use("/api/nasa/epic", epicRoutes);
 app.use("/api/eonet", eonetRoutes);
 
 // Home route
