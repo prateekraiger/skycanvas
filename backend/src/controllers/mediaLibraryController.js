@@ -37,7 +37,7 @@ const mediaLibraryController = {
         page_size = 25,
       } = req.query;
 
-      // Validate search query
+      // If no search query, return popular media instead
       if (
         !q &&
         !center &&
@@ -52,12 +52,8 @@ const mediaLibraryController = {
         !year_start &&
         !year_end
       ) {
-        return formatResponse(
-          res,
-          400,
-          null,
-          "At least one search parameter is required"
-        );
+        // By default, return popular media if no query is specified
+        return mediaLibraryController.getPopularMedia(req, res, next);
       }
 
       const params = {
